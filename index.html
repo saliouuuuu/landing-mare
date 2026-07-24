@@ -585,26 +585,63 @@
     }
 
     .audience-card {
-      padding: 32px 20px;
-      text-align: center;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 1/1.15;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px 20px;
+      text-align: left;
+      cursor: pointer;
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
     }
 
-    .audience-icon {
-      font-size: 2.2rem;
-      margin-bottom: 16px;
-      display: block;
+    .audience-card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .audience-card:hover .audience-bg {
+      transform: scale(1.06);
+    }
+
+    .audience-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .audience-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%);
+      pointer-events: none;
+    }
+
+    .audience-text {
+      position: relative;
+      z-index: 1;
     }
 
     .audience-card h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 6px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--white);
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
     }
 
     .audience-card p {
       font-size: 0.78rem;
-      color: var(--grey);
+      color: rgba(255,255,255,0.7);
       line-height: 1.5;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
 
     /* ─── Testimonials ─── */
@@ -1138,35 +1175,47 @@
       </p>
 
       <div class="audience-grid">
-        <div class="audience-card glass fade-up">
-          <span class="audience-icon">&#128295;</span>
-          <h3>Artigiani</h3>
-          <p>Falegnami, fabbri, elettricisti</p>
+        <div class="audience-card fade-up">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>Artigiani</h3>
+            <p>Falegnami, fabbri, elettricisti</p>
+          </div>
         </div>
-        <div class="audience-card glass fade-up delay-1">
-          <span class="audience-icon">&#127978;</span>
-          <h3>Negozi</h3>
-          <p>Boutique, alimentari, botteghe</p>
+        <div class="audience-card fade-up delay-1">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>Negozi</h3>
+            <p>Boutique, alimentari, botteghe</p>
+          </div>
         </div>
-        <div class="audience-card glass fade-up delay-2">
-          <span class="audience-icon">&#127976;</span>
-          <h3>B&amp;B e Hotel</h3>
-          <p>Agriturismi, case vacanza</p>
+        <div class="audience-card fade-up delay-2">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>B&amp;B e Hotel</h3>
+            <p>Agriturismi, case vacanza</p>
+          </div>
         </div>
-        <div class="audience-card glass fade-up delay-3">
-          <span class="audience-icon">&#9878;&#65039;</span>
-          <h3>Professionisti</h3>
-          <p>Studi, consulenti, freelance</p>
+        <div class="audience-card fade-up delay-3">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>Professionisti</h3>
+            <p>Studi, consulenti, freelance</p>
+          </div>
         </div>
-        <div class="audience-card glass fade-up delay-4">
-          <span class="audience-icon">&#127861;</span>
-          <h3>Ristoranti</h3>
-          <p>Trattorie, pizzerie, bar</p>
+        <div class="audience-card fade-up delay-4">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>Ristoranti</h3>
+            <p>Trattorie, pizzerie, bar</p>
+          </div>
         </div>
-        <div class="audience-card glass fade-up delay-5">
-          <span class="audience-icon">&#128135;</span>
-          <h3>Servizi</h3>
-          <p>Saloni, estetisti, palestre</p>
+        <div class="audience-card fade-up delay-5">
+          <div class="audience-bg" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80&auto=format&fit=crop')"></div>
+          <div class="audience-text">
+            <h3>Servizi</h3>
+            <p>Saloni, estetisti, palestre</p>
+          </div>
         </div>
       </div>
     </div>
