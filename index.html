@@ -1099,166 +1099,6 @@
       border: 1px solid var(--glass-border);
     }
 
-    /* ─── AI Receptionist ─── */
-    .ai-section {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ai-section::before {
-      content: '';
-      position: absolute;
-      top: 10%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(232, 213, 183, 0.05) 0%, transparent 68%);
-      pointer-events: none;
-    }
-
-    .ai-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      margin-top: 48px;
-      align-items: start;
-      position: relative;
-      z-index: 1;
-    }
-
-    .ai-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 16px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1.8px;
-      background: rgba(232, 213, 183, 0.1);
-      border: 1px solid rgba(232, 213, 183, 0.2);
-      color: var(--beige);
-      margin-bottom: 22px;
-    }
-
-    .ai-features {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 32px;
-    }
-
-    .ai-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      padding: 16px 18px;
-      border-radius: var(--radius-sm);
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      font-size: 0.88rem;
-      color: var(--grey-light);
-      line-height: 1.5;
-      transition: var(--transition);
-    }
-
-    .ai-features li:hover {
-      background: var(--glass-bg-hover);
-      border-color: rgba(255,255,255,0.11);
-    }
-
-    .ai-features svg {
-      width: 19px;
-      height: 19px;
-      flex-shrink: 0;
-      color: var(--beige);
-      margin-top: 1px;
-    }
-
-    .ai-features strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    /* Card prezzo AI */
-    .ai-price {
-      padding: 36px 30px;
-      position: sticky;
-      top: 100px;
-    }
-
-    .ai-price .price-name {
-      margin-bottom: 14px;
-    }
-
-    .ai-price-main {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 4px;
-    }
-
-    .ai-price-main .amount {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3.2rem;
-      line-height: 1;
-      letter-spacing: -1.5px;
-      background: linear-gradient(120deg, #ffffff 0%, #b8b8b8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .ai-price-main .per {
-      font-size: 0.9rem;
-      color: var(--grey);
-    }
-
-    .ai-setup {
-      font-size: 0.85rem;
-      color: var(--grey-light);
-      padding: 14px 16px;
-      border-radius: var(--radius-sm);
-      background: rgba(232, 213, 183, 0.06);
-      border: 1px solid rgba(232, 213, 183, 0.16);
-      margin: 22px 0 26px;
-      line-height: 1.5;
-    }
-
-    .ai-setup strong {
-      color: var(--beige-light);
-      font-weight: 600;
-    }
-
-    .ai-included {
-      list-style: none;
-      margin-bottom: 26px;
-      padding-top: 22px;
-      border-top: 1px solid var(--glass-border);
-    }
-
-    .ai-included li {
-      font-size: 0.83rem;
-      color: var(--grey);
-      line-height: 1.5;
-      padding: 6px 0 6px 22px;
-      position: relative;
-    }
-
-    .ai-included li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 12px;
-      width: 11px;
-      height: 6px;
-      border-left: 1.5px solid var(--beige-dark);
-      border-bottom: 1.5px solid var(--beige-dark);
-      transform: rotate(-45deg);
-    }
-
     /* ─── Confronto "loro vs noi" ─── */
     .vs-wrap {
       margin-top: 56px;
@@ -1305,6 +1145,9 @@
     .vs-us {
       font-size: 0.86rem;
       line-height: 1.55;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
     }
 
     .vs-them { color: var(--grey); }
@@ -1315,6 +1158,45 @@
     }
 
     .vs-us strong { color: var(--beige-light); font-weight: 600; }
+
+    .vs-x,
+    .vs-v {
+      font-style: normal;
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    .vs-x { background: rgba(255,255,255,0.05); color: var(--grey-dark); }
+    .vs-v { background: rgba(232, 213, 183, 0.16); color: var(--beige); }
+
+    .vs-head .vs-them,
+    .vs-head .vs-us { display: block; }
+
+    /* le due colonne entrano da lati opposti */
+    .vs-row .vs-them,
+    .vs-row .vs-us {
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .vs-row .vs-them { transform: translateX(-14px); }
+    .vs-row .vs-us   { transform: translateX(14px); }
+
+    .vs-row.visible .vs-them,
+    .vs-row.visible .vs-us {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .vs-row.visible .vs-us { transition-delay: 0.12s; }
 
     /* ─── Matrice confronto piani ─── */
     .matrix-scroll {
@@ -1374,6 +1256,14 @@
 
     .tick { color: var(--beige); font-size: 1rem; }
     .cross { color: var(--dark-3); font-size: 1rem; }
+
+    .swipe-hint {
+      display: none;
+      margin-top: 14px;
+      font-size: 0.74rem;
+      color: var(--grey-dark);
+      text-align: center;
+    }
 
     .matrix-hint {
       margin-top: 14px;
@@ -1938,6 +1828,90 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* ─── Compattamento su telefono ─── */
+    @media (max-width: 639px) {
+      section { padding: 62px 0; }
+      .statement { padding: 70px 0; }
+      .cta-section { padding: 80px 0; }
+
+      .section-title { font-size: clamp(1.75rem, 7.5vw, 2.2rem); margin-bottom: 14px; }
+      .section-subtitle { font-size: 0.92rem; }
+      .section-label { margin-bottom: 14px; }
+      .big-text { font-size: clamp(2.2rem, 11vw, 3rem); letter-spacing: -1.5px; }
+
+      /* due colonne per le griglie di schede corte */
+      .features-grid { grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 34px; }
+      .feature-card { padding: 22px 16px; }
+      .feature-icon { width: 38px; height: 38px; border-radius: 11px; margin-bottom: 13px; }
+      .feature-icon svg { width: 18px; height: 18px; }
+      .feature-card h3 { font-size: 0.94rem; margin-bottom: 6px; }
+      .feature-card p { font-size: 0.79rem; line-height: 1.5; }
+
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 11px; margin-top: 34px; }
+      .process-step { padding: 22px 16px; }
+      .step-number { font-size: 2.2rem; margin-bottom: 10px; }
+      .process-step h3 { font-size: 0.94rem; margin-bottom: 6px; }
+      .process-step p { font-size: 0.79rem; line-height: 1.5; }
+      .step-tag { margin-top: 10px; font-size: 0.62rem; padding: 4px 10px; }
+
+      .audience-grid { gap: 10px; margin-top: 34px; }
+      .audience-card { aspect-ratio: 1 / 0.82; padding: 16px 14px; }
+      .audience-card h3 { font-size: 0.95rem; }
+      .audience-card p { font-size: 0.72rem; }
+
+      .showcase { padding: 62px 0; }
+      .showcase-stats { gap: 11px; margin-top: 36px; }
+      .stat-card { padding: 24px 12px; }
+      .stat-label { font-size: 0.76rem; }
+
+      /* listini: si sfogliano di lato, con un pezzo della card
+         successiva sempre visibile perche' si capisca che ce ne sono altre */
+      .pricing-grid, .care-grid, .testimonials-grid {
+        grid-auto-flow: column;
+        grid-auto-columns: 84%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        margin-top: 34px;
+        padding-bottom: 6px;
+      }
+      .price-card, .care-card, .testimonial-card { scroll-snap-align: center; }
+      .swipe-hint { display: block; }
+
+      .price-card, .care-card { padding: 26px 20px; }
+      .price-list li, .care-list li { padding: 5px 0 5px 22px; font-size: 0.82rem; }
+      .price-list li::before, .care-list li::before { top: 11px; }
+      .price-tagline { font-size: 0.82rem; margin-bottom: 20px; padding-bottom: 20px; }
+      .care-list { margin: 18px 0 22px; padding-top: 18px; }
+      .trust-row { margin-top: 32px; }
+      .trust-item { padding: 17px 15px; gap: 11px; }
+
+      .vs-wrap { margin-top: 34px; }
+      .vs-head > *, .vs-row > * { padding: 12px 13px; }
+      .vs-them, .vs-us { font-size: 0.78rem; line-height: 1.45; gap: 7px; }
+      .vs-label { font-size: 0.64rem; letter-spacing: 1.4px; padding: 9px 13px; }
+
+      .value-compare { margin-top: 40px; padding: 28px 20px; }
+      .compare-row { padding: 18px 18px; }
+
+      .matrix-scroll { margin-top: 34px; }
+      .quiz { padding: 26px 18px; margin-top: 34px; }
+      .quiz-step { margin-bottom: 24px; }
+      .quiz-opt { padding: 12px 15px; font-size: 0.84rem; }
+
+      .testimonial-card { padding: 24px 20px; }
+      .testimonial-card blockquote { font-size: 0.87rem; margin-bottom: 18px; }
+
+      .rating-summary { margin-top: 28px; padding: 20px; gap: 14px; }
+      .rating-cta { margin-left: 0; width: 100%; }
+      .rating-cta .btn-primary { width: 100%; justify-content: center; }
+      .rating-divider { display: none; }
+
+      footer { padding: 46px 0 32px; }
+      .footer-grid { gap: 30px; margin-bottom: 34px; }
+    }
+
     /* ─── Responsive ─── */
     @media (min-width: 640px) {
       .features-grid { grid-template-columns: 1fr 1fr; }
@@ -1948,7 +1922,6 @@
       .form-row.two { grid-template-columns: 1fr 1fr; }
       .compare-rows { grid-template-columns: repeat(3, 1fr); }
       .trust-row { grid-template-columns: repeat(4, 1fr); }
-      .ai-features { grid-template-columns: 1fr 1fr; }
       .care-grid { grid-template-columns: repeat(3, 1fr); }
       .quiz-opts { grid-template-columns: repeat(3, 1fr); }
       .vs-head, .vs-row { grid-template-columns: 200px 1fr 1fr; }
@@ -1963,8 +1936,6 @@
       .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
       .audience-grid { grid-template-columns: repeat(6, 1fr); }
       .pricing-grid { grid-template-columns: repeat(3, 1fr); }
-      .ai-grid { grid-template-columns: 1.35fr 1fr; gap: 56px; }
-      .ai-features { grid-template-columns: 1fr; }
       .review-form-wrap { padding: 44px 40px; }
       .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
       .footer-bottom { flex-direction: row; justify-content: space-between; }
@@ -1989,7 +1960,6 @@
         <img src="images/logo.jpeg" alt="Marea Creative">
       </a>
       <ul class="nav-links">
-        <li><a href="#receptionist">AI Receptionist</a></li>
         <li><a href="#confronto">Perch&eacute; noi</a></li>
         <li><a href="#prezzi">Siti</a></li>
         <li><a href="#care">Care</a></li>
@@ -2009,7 +1979,6 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" id="menuClose" aria-label="Chiudi">&times;</button>
-    <a href="#receptionist" onclick="closeMobile()">AI Receptionist</a>
     <a href="#confronto" onclick="closeMobile()">Perch&eacute; noi</a>
     <a href="#processo" onclick="closeMobile()">Come lavoriamo</a>
     <a href="#prezzi" onclick="closeMobile()">Siti e prezzi</a>
@@ -2094,92 +2063,6 @@
       <span class="accent">&bull;</span>
     </div>
   </div>
-
-  <!-- AI Receptionist -->
-  <section class="ai-section" id="receptionist">
-    <div class="container">
-      <span class="ai-tag fade-up">
-        <span class="dot" style="width:6px;height:6px;background:var(--beige);border-radius:50%;animation:pulse 2s infinite"></span>
-        Novit&agrave;
-      </span>
-      <h2 class="section-title serif gradient-text fade-up delay-1">
-        Non puoi fermarti ogni volta<br>
-        <span class="gradient-beige">che squilla il telefono?</span>
-      </h2>
-      <p class="section-subtitle fade-up delay-2">
-        Un assistente AI risponde al posto tuo con un tono professionale,
-        raccoglie le informazioni e ti inoltra solo le richieste importanti.
-        Tu continui a lavorare.
-      </p>
-
-      <div class="ai-grid">
-        <div>
-          <ul class="ai-features">
-            <li class="fade-up">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
-              <span><strong>Risponde 24 ore su 24.</strong> Anche di sera, il sabato
-              e mentre hai le mani occupate.</span>
-            </li>
-            <li class="fade-up delay-1">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/></svg>
-              <span><strong>Risponde alle domande frequenti.</strong> Orari, zone
-              servite, tipi di intervento, tempi di attesa.</span>
-            </li>
-            <li class="fade-up delay-2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
-              <span><strong>Raccoglie i dati del cliente.</strong> Nome, telefono,
-              indirizzo e cosa gli serve, scritti e pronti.</span>
-            </li>
-            <li class="fade-up delay-3">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
-              <span><strong>Prenota gli appuntamenti.</strong> Si collega al tuo
-              calendario e fissa senza sovrapposizioni.</span>
-            </li>
-            <li class="fade-up delay-4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
-              <span><strong>Ti passa le urgenze.</strong> Se serve subito,
-              la chiamata arriva a te. Il resto aspetta.</span>
-            </li>
-            <li class="fade-up delay-5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg>
-              <span><strong>Report mensile delle chiamate.</strong> Quante ne sono
-              arrivate, cosa chiedevano, quante hai chiuso.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="ai-price glass fade-up delay-2">
-          <div class="price-name">AI Receptionist</div>
-          <div class="ai-price-main">
-            <span class="amount">99&nbsp;&euro;</span>
-            <span class="per">/ mese</span>
-          </div>
-          <div class="price-terms">Disdici quando vuoi</div>
-
-          <div class="ai-setup">
-            <strong>+ 299 &euro; di setup</strong> una tantum: configuriamo la voce,
-            i flussi di conversazione, il collegamento al calendario
-            e testiamo tutto insieme prima di attivare.
-          </div>
-
-          <ul class="ai-included">
-            <li>Numero dedicato o deviazione dal tuo</li>
-            <li>Personalizzazione su misura della tua attivit&agrave;</li>
-            <li>Aggiornamenti e manutenzione inclusi</li>
-            <li>Assistenza diretta via WhatsApp</li>
-          </ul>
-
-          <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20sapere%20come%20funziona%20l%27AI%20Receptionist%20da%2099%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Provalo sulla tua attivit&agrave;</a>
-          <p style="font-size:0.76rem;color:var(--grey-dark);line-height:1.5;margin-top:16px;text-align:center">
-            Ti facciamo sentire una chiamata di prova
-            prima che decidi qualsiasi cosa.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
 
   <!-- Big Statement 1 -->
   <div class="statement">
@@ -2269,60 +2152,87 @@
 
         <div class="vs-row">
           <span class="vs-label">Chi ti risponde</span>
-          <span class="vs-them">Un commerciale, poi un ticket, poi qualcun altro</span>
-          <span class="vs-us">Sempre <strong>chi ha costruito il tuo sito</strong></span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>Un call center</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>Chi ha fatto il tuo sito</strong></span></span>
         </div>
 
         <div class="vs-row">
           <span class="vs-label">Prima di pagare</span>
-          <span class="vs-them">Un preventivo su carta e tanta fiducia</span>
-          <span class="vs-us"><strong>Vedi una demo del tuo sito</strong>, gratis</span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>Solo un preventivo</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>Una demo vera</strong>, gratis</span></span>
         </div>
 
         <div class="vs-row">
           <span class="vs-label">Tempi</span>
-          <span class="vs-them">Due o tre mesi, spesso di pi&ugrave;</span>
-          <span class="vs-us"><strong>Da 10 a 20 giorni</strong> lavorativi</span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>Due o tre mesi</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>10-20 giorni</strong></span></span>
         </div>
 
         <div class="vs-row">
           <span class="vs-label">Il sito</span>
-          <span class="vs-them">Un template comprato e riempito in fretta</span>
-          <span class="vs-us">Disegnato <strong>sulla tua attivit&agrave;</strong></span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>Un template riempito</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>Disegnato su di te</strong></span></span>
         </div>
 
         <div class="vs-row">
           <span class="vs-label">Dopo la consegna</span>
-          <span class="vs-them">Ti arrangi, o paghi a ore ogni volta</span>
-          <span class="vs-us"><strong>Marea Care</strong> da 29&euro; al mese</span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>Ti arrangi</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>Care da 29&euro;</strong> al mese</span></span>
         </div>
 
         <div class="vs-row">
-          <span class="vs-label">Una modifica</span>
-          <span class="vs-them">Apri un ticket e aspetti</span>
-          <span class="vs-us">Scrivi su WhatsApp, <strong>inclusa nel piano</strong></span>
+          <span class="vs-label">Dove sono</span>
+          <span class="vs-them"><i class="vs-x">&times;</i><span>A chilometri di distanza</span></span>
+          <span class="vs-us"><i class="vs-v">&#10003;</i><span><strong>In provincia di Cuneo</strong></span></span>
         </div>
+      </div>
 
-        <div class="vs-row">
-          <span class="vs-label">Chi hai davanti</span>
-          <span class="vs-them">Un'azienda a chilometri di distanza</span>
-          <span class="vs-us">Qualcuno <strong>della tua provincia</strong></span>
+      <!-- Giustificazione del prezzo -->
+      <div class="value-compare glass fade-up">
+        <h3 class="gradient-text">Perch&eacute; 460&euro; e non 99&euro;</h3>
+        <p>
+          Perch&eacute; a 99&euro; ti danno un template compilato in mezz'ora,
+          identico a mille altri e lento da caricare. E perch&eacute; a 2.500&euro;
+          paghi la struttura di un'agenzia, non il tuo sito. Noi stiamo in mezzo,
+          e questo &egrave; il motivo.
+        </p>
+        <div class="compare-rows">
+          <div class="compare-row">
+            <div class="compare-head">
+              <span class="compare-who">Template fai-da-te</span>
+              <span class="compare-price">99&euro;</span>
+            </div>
+            <p class="compare-desc">
+              Grafica riciclata, testi generici, caricamento lento.
+              Il lavoro di scrivere e configurare resta tutto a te.
+            </p>
+          </div>
+          <div class="compare-row highlight">
+            <div class="compare-head">
+              <span class="compare-who">Marea Starter</span>
+              <span class="compare-price">460&euro;</span>
+            </div>
+            <p class="compare-desc">
+              Disegnato sulla tua attivit&agrave;, scritto insieme a te,
+              online in due settimane. Parli con chi lo costruisce.
+            </p>
+          </div>
+          <div class="compare-row">
+            <div class="compare-head">
+              <span class="compare-who">Agenzia strutturata</span>
+              <span class="compare-price">2.500&euro;+</span>
+            </div>
+            <p class="compare-desc">
+              Qualit&agrave; alta ma tempi lunghi, un account che fa da tramite
+              e un preventivo pensato per aziende pi&ugrave; grandi.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <div class="section-divider"></div>
-
-  <!-- Big Statement 2 -->
-  <div class="statement">
-    <div class="container">
-      <h2 class="big-text serif fade-up">
-        <span class="gradient-subtle">Veloce. Bello.</span><br>
-        <span class="gradient-beige">Tuo.</span>
-      </h2>
-    </div>
-  </div>
 
   <div class="section-divider"></div>
 
@@ -2383,15 +2293,15 @@
         </h2>
         <div class="showcase-stats">
           <div class="stat-card glass fade-up">
-            <div class="stat-number gradient-beige">2s</div>
+            <div class="stat-number gradient-beige" data-count="2" data-suffix="s">2s</div>
             <div class="stat-label">Tempo di caricamento<br>medio dei nostri siti</div>
           </div>
           <div class="stat-card glass fade-up delay-1">
-            <div class="stat-number gradient-beige">100%</div>
+            <div class="stat-number gradient-beige" data-count="100" data-suffix="%">100%</div>
             <div class="stat-label">Mobile-first<br>e responsive</div>
           </div>
           <div class="stat-card glass fade-up delay-2">
-            <div class="stat-number gradient-beige">15gg</div>
+            <div class="stat-number gradient-beige" data-count="15" data-suffix="gg">15gg</div>
             <div class="stat-label">Consegna media<br>di un progetto</div>
           </div>
           <div class="stat-card glass fade-up delay-3">
@@ -2558,6 +2468,8 @@
         </div>
       </div>
 
+      <p class="swipe-hint">Scorri di lato per vedere tutti i pacchetti</p>
+
       <!-- Garanzie -->
       <div class="trust-row fade-up">
         <div class="trust-item">
@@ -2578,59 +2490,17 @@
         </div>
       </div>
 
-      <p class="pricing-extra fade-up">
-        Serve un e-commerce, un'area riservata o un collegamento al tuo
-        gestionale? Sono progetti a s&eacute;: ne parliamo e ti facciamo un
-        preventivo dedicato, senza impegno.
-      </p>
-
-      <!-- Giustificazione del prezzo -->
-      <div class="value-compare glass fade-up">
-        <h3 class="gradient-text">Perch&eacute; 460&euro; e non 99&euro;</h3>
-        <p>
-          Perch&eacute; a 99&euro; ti danno un template compilato in mezz'ora,
-          identico a mille altri e lento da caricare. E perch&eacute; a 2.500&euro;
-          paghi la struttura di un'agenzia, non il tuo sito. Noi stiamo in mezzo,
-          e questo &egrave; il motivo.
-        </p>
-        <div class="compare-rows">
-          <div class="compare-row">
-            <div class="compare-head">
-              <span class="compare-who">Template fai-da-te</span>
-              <span class="compare-price">99&euro;</span>
-            </div>
-            <p class="compare-desc">
-              Grafica riciclata, testi generici, caricamento lento.
-              Il lavoro di scrivere e configurare resta tutto a te.
-            </p>
-          </div>
-          <div class="compare-row highlight">
-            <div class="compare-head">
-              <span class="compare-who">Marea Starter</span>
-              <span class="compare-price">460&euro;</span>
-            </div>
-            <p class="compare-desc">
-              Disegnato sulla tua attivit&agrave;, scritto insieme a te,
-              online in due settimane. Parli con chi lo costruisce.
-            </p>
-          </div>
-          <div class="compare-row">
-            <div class="compare-head">
-              <span class="compare-who">Agenzia strutturata</span>
-              <span class="compare-price">2.500&euro;+</span>
-            </div>
-            <p class="compare-desc">
-              Qualit&agrave; alta ma tempi lunghi, un account che fa da tramite
-              e un preventivo pensato per aziende pi&ugrave; grandi.
-            </p>
-          </div>
-        </div>
         <div class="price-note">
           <span>Demo gratuita prima di pagare</span>
           <span>Pagamento una tantum, non un abbonamento</span>
           <span>Il sito &egrave; tuo, non in affitto</span>
         </div>
-      </div>
+
+      <p class="pricing-extra fade-up">
+        Serve un e-commerce, un'area riservata o un collegamento al tuo
+        gestionale? Sono progetti a s&eacute;: ne parliamo e ti facciamo un
+        preventivo dedicato, senza impegno.
+      </p>
     </div>
   </section>
 
@@ -2785,6 +2655,8 @@
         </div>
       </div>
 
+      <p class="swipe-hint">Scorri di lato per vedere tutti i piani</p>
+
       <p class="care-note fade-up">
         Care &egrave; facoltativo: il sito resta tuo anche senza.
         Serve se vuoi che qualcuno se ne occupi al posto tuo.
@@ -2822,15 +2694,6 @@
             <button type="button" class="quiz-opt" data-v="base">Lo lascio com'&egrave;, cambia poco</button>
             <button type="button" class="quiz-opt" data-v="plus">Qualche modifica ogni tanto</button>
             <button type="button" class="quiz-opt" data-v="premium">Cambio spesso foto, testi e offerte</button>
-          </div>
-        </div>
-
-        <div class="quiz-step" data-q="ai">
-          <div class="quiz-q"><span class="n">03</span> Ti squilla il telefono mentre lavori?</div>
-          <div class="quiz-opts">
-            <button type="button" class="quiz-opt" data-v="si">Di continuo, e perdo chiamate</button>
-            <button type="button" class="quiz-opt" data-v="forse">Ogni tanto, non sempre rispondo</button>
-            <button type="button" class="quiz-opt" data-v="no">No, riesco a rispondere sempre</button>
           </div>
         </div>
 
@@ -3041,7 +2904,6 @@
         </div>
         <div class="footer-col">
           <h4>Navigazione</h4>
-          <a href="#receptionist">AI Receptionist</a>
           <a href="#confronto">Perch&eacute; noi</a>
           <a href="#prezzi">Siti e prezzi</a>
           <a href="#piani">Confronto piani</a>
@@ -3094,18 +2956,41 @@
 
     menuClose.addEventListener('click', closeMobile);
 
+    var motoRidotto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          if (entry.target.dataset.count) conta(entry.target);
           observer.unobserve(entry.target);
         }
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.fade-up').forEach(function(el) {
+    // .fade-up sale, .vs-row fa entrare le due colonne da lati opposti
+    document.querySelectorAll('.fade-up, .vs-row, .stat-number[data-count]').forEach(function(el) {
       observer.observe(el);
     });
+
+    /* ─── I numeri salgono da zero quando entrano in vista ─── */
+    function conta(el) {
+      var meta = Number(el.dataset.count);
+      var suffisso = el.dataset.suffix || '';
+      if (motoRidotto || !meta) { el.textContent = meta + suffisso; return; }
+
+      var durata = 1100;
+      var inizio = null;
+
+      function passo(ora) {
+        if (inizio === null) inizio = ora;
+        var t = Math.min((ora - inizio) / durata, 1);
+        var eased = 1 - Math.pow(1 - t, 3);          // rallenta verso la fine
+        el.textContent = Math.round(meta * eased) + suffisso;
+        if (t < 1) requestAnimationFrame(passo);
+      }
+      requestAnimationFrame(passo);
+    }
 
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
       anchor.addEventListener('click', function(e) {
@@ -3222,14 +3107,12 @@
         btn.classList.add('on');
         scelte[step.dataset.q] = btn.dataset.v;
 
-        if (scelte.sito && scelte.care && scelte.ai) mostra();
+        if (scelte.sito && scelte.care) mostra();
       });
 
       function mostra() {
         var sito = siti[scelte.sito];
         var cura = cure[scelte.care];
-        var vuoleAi = scelte.ai === 'si';
-        var forseAi = scelte.ai === 'forse';
 
         document.getElementById('quizTitle').textContent =
           'Per te: ' + sito.nome + ' + ' + cura.nome;
@@ -3242,25 +3125,15 @@
         } else {
           perche += 'Cambiando spesso i contenuti, le modifiche illimitate si ripagano da sole.';
         }
-        if (vuoleAi) {
-          perche += ' E se perdi chiamate di continuo, l’AI Receptionist è la voce che ti manca.';
-        } else if (forseAi) {
-          perche += ' L’AI Receptionist può aspettare: valutalo quando le chiamate perse iniziano a pesare.';
-        }
         document.getElementById('quizWhy').textContent = perche;
 
         var picks = document.getElementById('quizPicks');
         picks.innerHTML = '';
-        aggiungi(picks, sito.nome + ' — ' + sito.prezzo, false);
-        aggiungi(picks, cura.nome + ' — ' + cura.prezzo, false);
-        if (vuoleAi) {
-          aggiungi(picks, 'AI Receptionist — 99 €/mese', false);
-        } else if (forseAi) {
-          aggiungi(picks, 'AI Receptionist — da valutare', true);
-        }
+        aggiungi(picks, sito.nome + ' \u2014 ' + sito.prezzo, false);
+        aggiungi(picks, cura.nome + ' \u2014 ' + cura.prezzo, false);
 
-        var testo = 'Ciao, ho fatto il test sul sito. Mi interessa ' + sito.nome +
-                    ' con ' + cura.nome + (vuoleAi ? ' e l’AI Receptionist' : '') + '.';
+        var testo = 'Ciao, ho fatto il test sul sito. Mi interessa ' +
+                    sito.nome + ' con ' + cura.nome + '.';
         document.getElementById('quizCta').href =
           'https://wa.me/393505920776?text=' + encodeURIComponent(testo);
 
