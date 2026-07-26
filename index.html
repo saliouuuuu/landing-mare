@@ -1259,6 +1259,316 @@
       transform: rotate(-45deg);
     }
 
+    /* ─── Confronto "loro vs noi" ─── */
+    .vs-wrap {
+      margin-top: 56px;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .vs-head,
+    .vs-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--glass-border);
+    }
+
+    .vs-head > *,
+    .vs-row > * {
+      background: var(--black);
+      padding: 16px 18px;
+    }
+
+    .vs-label {
+      grid-column: 1 / -1;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--grey);
+      font-weight: 600;
+      background: rgba(255,255,255,0.02) !important;
+    }
+
+    .vs-head > span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .vs-head .vs-them { color: var(--grey); }
+    .vs-head .vs-us { color: var(--beige); }
+
+    .vs-them,
+    .vs-us {
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .vs-them { color: var(--grey); }
+
+    .vs-us {
+      color: var(--white);
+      background: rgba(232, 213, 183, 0.04) !important;
+    }
+
+    .vs-us strong { color: var(--beige-light); font-weight: 600; }
+
+    /* ─── Matrice confronto piani ─── */
+    .matrix-scroll {
+      margin-top: 48px;
+      overflow-x: auto;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .matrix {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .matrix thead th {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--grey);
+      font-weight: 600;
+      background: rgba(255,255,255,0.02);
+      position: sticky;
+      top: 0;
+    }
+
+    .matrix thead th.hi {
+      color: var(--beige);
+      background: rgba(232, 213, 183, 0.06);
+    }
+
+    .matrix td.hi { background: rgba(232, 213, 183, 0.04); }
+
+    .matrix tbody th {
+      font-weight: 500;
+      color: var(--grey-light);
+      white-space: nowrap;
+    }
+
+    .matrix td {
+      color: var(--white);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .matrix tr:last-child th,
+    .matrix tr:last-child td { border-bottom: none; }
+
+    .tick { color: var(--beige); font-size: 1rem; }
+    .cross { color: var(--dark-3); font-size: 1rem; }
+
+    .matrix-hint {
+      margin-top: 14px;
+      font-size: 0.76rem;
+      color: var(--grey-dark);
+      text-align: center;
+    }
+
+    /* ─── Marea Care ─── */
+    .care-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 56px;
+    }
+
+    .care-card {
+      padding: 32px 26px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .care-card.featured {
+      border-color: rgba(232, 213, 183, 0.28);
+      background: rgba(232, 213, 183, 0.035);
+    }
+
+    .care-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.6rem;
+      line-height: 1;
+      letter-spacing: -1.2px;
+      margin-bottom: 4px;
+      background: linear-gradient(120deg, #ffffff 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .care-value small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--grey);
+      letter-spacing: 0;
+    }
+
+    .care-list {
+      list-style: none;
+      margin: 22px 0 26px;
+      flex-grow: 1;
+      padding-top: 22px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .care-list li {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      line-height: 1.5;
+      padding: 7px 0 7px 24px;
+      position: relative;
+    }
+
+    .care-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 12px;
+      height: 6px;
+      border-left: 1.5px solid var(--beige);
+      border-bottom: 1.5px solid var(--beige);
+      transform: rotate(-45deg);
+    }
+
+    .care-list li strong { color: var(--white); font-weight: 600; }
+
+    .care-note {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+
+    /* ─── Quiz "che piano fa per te" ─── */
+    .quiz {
+      margin-top: 48px;
+      padding: 36px 28px;
+    }
+
+    .quiz-step { margin-bottom: 30px; }
+    .quiz-step:last-of-type { margin-bottom: 0; }
+
+    .quiz-q {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .quiz-q .n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--beige);
+      flex-shrink: 0;
+    }
+
+    .quiz-opts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .quiz-opt {
+      text-align: left;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--grey-light);
+      font-family: inherit;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quiz-opt:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.14);
+      color: var(--white);
+    }
+
+    .quiz-opt.on {
+      background: rgba(232, 213, 183, 0.1);
+      border-color: rgba(232, 213, 183, 0.45);
+      color: var(--white);
+    }
+
+    .quiz-result {
+      margin-top: 30px;
+      padding: 26px 24px;
+      border-radius: var(--radius);
+      background: rgba(232, 213, 183, 0.06);
+      border: 1px solid rgba(232, 213, 183, 0.24);
+      display: none;
+    }
+
+    .quiz-result.show {
+      display: block;
+      animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .quiz-result h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+      color: var(--beige-light);
+    }
+
+    .quiz-result p {
+      font-size: 0.88rem;
+      color: var(--grey-light);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .quiz-picks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .quiz-pick {
+      font-size: 0.78rem;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(232, 213, 183, 0.12);
+      border: 1px solid rgba(232, 213, 183, 0.28);
+      color: var(--beige-light);
+      font-weight: 500;
+    }
+
+    .quiz-pick.muted {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--glass-border);
+      color: var(--grey);
+    }
+
     /* ─── Rating aggregato ─── */
     .rating-summary {
       display: flex;
@@ -1639,6 +1949,10 @@
       .compare-rows { grid-template-columns: repeat(3, 1fr); }
       .trust-row { grid-template-columns: repeat(4, 1fr); }
       .ai-features { grid-template-columns: 1fr 1fr; }
+      .care-grid { grid-template-columns: repeat(3, 1fr); }
+      .quiz-opts { grid-template-columns: repeat(3, 1fr); }
+      .vs-head, .vs-row { grid-template-columns: 200px 1fr 1fr; }
+      .vs-label { grid-column: auto; background: rgba(255,255,255,0.02) !important; }
     }
 
     @media (min-width: 900px) {
@@ -1675,11 +1989,11 @@
         <img src="images/logo.jpeg" alt="Marea Creative">
       </a>
       <ul class="nav-links">
-        <li><a href="#perche">Perch&eacute; noi</a></li>
-        <li><a href="#processo">Come lavoriamo</a></li>
-        <li><a href="#prezzi">Prezzi</a></li>
         <li><a href="#receptionist">AI Receptionist</a></li>
-        <li><a href="#testimonianze">Recensioni</a></li>
+        <li><a href="#confronto">Perch&eacute; noi</a></li>
+        <li><a href="#prezzi">Siti</a></li>
+        <li><a href="#care">Care</a></li>
+        <li><a href="#consiglio">Che piano fa per me</a></li>
         <li>
           <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="nav-cta" target="_blank" rel="noopener">
             Preventivo gratuito
@@ -1695,11 +2009,12 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" id="menuClose" aria-label="Chiudi">&times;</button>
-    <a href="#perche" onclick="closeMobile()">Perch&eacute; noi</a>
-    <a href="#processo" onclick="closeMobile()">Come lavoriamo</a>
-    <a href="#perchi" onclick="closeMobile()">Per chi</a>
-    <a href="#prezzi" onclick="closeMobile()">Prezzi</a>
     <a href="#receptionist" onclick="closeMobile()">AI Receptionist</a>
+    <a href="#confronto" onclick="closeMobile()">Perch&eacute; noi</a>
+    <a href="#processo" onclick="closeMobile()">Come lavoriamo</a>
+    <a href="#prezzi" onclick="closeMobile()">Siti e prezzi</a>
+    <a href="#care" onclick="closeMobile()">Marea Care</a>
+    <a href="#consiglio" onclick="closeMobile()">Che piano fa per me</a>
     <a href="#testimonianze" onclick="closeMobile()">Recensioni</a>
     <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="btn-primary" target="_blank" rel="noopener" style="margin-top: 16px;">
       Preventivo gratuito
@@ -1780,6 +2095,92 @@
     </div>
   </div>
 
+  <!-- AI Receptionist -->
+  <section class="ai-section" id="receptionist">
+    <div class="container">
+      <span class="ai-tag fade-up">
+        <span class="dot" style="width:6px;height:6px;background:var(--beige);border-radius:50%;animation:pulse 2s infinite"></span>
+        Novit&agrave;
+      </span>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Non puoi fermarti ogni volta<br>
+        <span class="gradient-beige">che squilla il telefono?</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Un assistente AI risponde al posto tuo con un tono professionale,
+        raccoglie le informazioni e ti inoltra solo le richieste importanti.
+        Tu continui a lavorare.
+      </p>
+
+      <div class="ai-grid">
+        <div>
+          <ul class="ai-features">
+            <li class="fade-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+              <span><strong>Risponde 24 ore su 24.</strong> Anche di sera, il sabato
+              e mentre hai le mani occupate.</span>
+            </li>
+            <li class="fade-up delay-1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/></svg>
+              <span><strong>Risponde alle domande frequenti.</strong> Orari, zone
+              servite, tipi di intervento, tempi di attesa.</span>
+            </li>
+            <li class="fade-up delay-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
+              <span><strong>Raccoglie i dati del cliente.</strong> Nome, telefono,
+              indirizzo e cosa gli serve, scritti e pronti.</span>
+            </li>
+            <li class="fade-up delay-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+              <span><strong>Prenota gli appuntamenti.</strong> Si collega al tuo
+              calendario e fissa senza sovrapposizioni.</span>
+            </li>
+            <li class="fade-up delay-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+              <span><strong>Ti passa le urgenze.</strong> Se serve subito,
+              la chiamata arriva a te. Il resto aspetta.</span>
+            </li>
+            <li class="fade-up delay-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg>
+              <span><strong>Report mensile delle chiamate.</strong> Quante ne sono
+              arrivate, cosa chiedevano, quante hai chiuso.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ai-price glass fade-up delay-2">
+          <div class="price-name">AI Receptionist</div>
+          <div class="ai-price-main">
+            <span class="amount">99&nbsp;&euro;</span>
+            <span class="per">/ mese</span>
+          </div>
+          <div class="price-terms">Disdici quando vuoi</div>
+
+          <div class="ai-setup">
+            <strong>+ 299 &euro; di setup</strong> una tantum: configuriamo la voce,
+            i flussi di conversazione, il collegamento al calendario
+            e testiamo tutto insieme prima di attivare.
+          </div>
+
+          <ul class="ai-included">
+            <li>Numero dedicato o deviazione dal tuo</li>
+            <li>Personalizzazione su misura della tua attivit&agrave;</li>
+            <li>Aggiornamenti e manutenzione inclusi</li>
+            <li>Assistenza diretta via WhatsApp</li>
+          </ul>
+
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20sapere%20come%20funziona%20l%27AI%20Receptionist%20da%2099%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Provalo sulla tua attivit&agrave;</a>
+          <p style="font-size:0.76rem;color:var(--grey-dark);line-height:1.5;margin-top:16px;text-align:center">
+            Ti facciamo sentire una chiamata di prova
+            prima che decidi qualsiasi cosa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
   <!-- Big Statement 1 -->
   <div class="statement">
     <div class="container">
@@ -1843,6 +2244,75 @@
       </div>
     </div>
   </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Loro vs Noi -->
+  <section id="confronto">
+    <div class="container">
+      <p class="section-label fade-up">Il confronto</p>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Come lavorano gli altri,<br>
+        <span class="gradient-beige">come lavoriamo noi.</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Nessuna cattiveria verso nessuno: sono solo due modi diversi
+        di stare al mondo. Scegli quello che ti serve.
+      </p>
+
+      <div class="vs-wrap fade-up delay-2">
+        <div class="vs-head">
+          <span></span>
+          <span class="vs-them">Di solito</span>
+          <span class="vs-us">Con Marea</span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Chi ti risponde</span>
+          <span class="vs-them">Un commerciale, poi un ticket, poi qualcun altro</span>
+          <span class="vs-us">Sempre <strong>chi ha costruito il tuo sito</strong></span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Prima di pagare</span>
+          <span class="vs-them">Un preventivo su carta e tanta fiducia</span>
+          <span class="vs-us"><strong>Vedi una demo del tuo sito</strong>, gratis</span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Tempi</span>
+          <span class="vs-them">Due o tre mesi, spesso di pi&ugrave;</span>
+          <span class="vs-us"><strong>Da 10 a 20 giorni</strong> lavorativi</span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Il sito</span>
+          <span class="vs-them">Un template comprato e riempito in fretta</span>
+          <span class="vs-us">Disegnato <strong>sulla tua attivit&agrave;</strong></span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Dopo la consegna</span>
+          <span class="vs-them">Ti arrangi, o paghi a ore ogni volta</span>
+          <span class="vs-us"><strong>Marea Care</strong> da 29&euro; al mese</span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Una modifica</span>
+          <span class="vs-them">Apri un ticket e aspetti</span>
+          <span class="vs-us">Scrivi su WhatsApp, <strong>inclusa nel piano</strong></span>
+        </div>
+
+        <div class="vs-row">
+          <span class="vs-label">Chi hai davanti</span>
+          <span class="vs-them">Un'azienda a chilometri di distanza</span>
+          <span class="vs-us">Qualcuno <strong>della tua provincia</strong></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
 
   <!-- Big Statement 2 -->
   <div class="statement">
@@ -2166,85 +2636,209 @@
 
   <div class="section-divider"></div>
 
-  <!-- AI Receptionist -->
-  <section class="ai-section" id="receptionist">
+  <!-- Confronto piani -->
+  <section id="piani">
     <div class="container">
-      <span class="ai-tag fade-up">
-        <span class="dot" style="width:6px;height:6px;background:var(--beige);border-radius:50%;animation:pulse 2s infinite"></span>
-        Novit&agrave;
-      </span>
+      <p class="section-label fade-up">Confronto piani</p>
       <h2 class="section-title serif gradient-text fade-up delay-1">
-        Non puoi fermarti ogni volta<br>
-        <span class="gradient-beige">che squilla il telefono?</span>
+        Cosa cambia<br>
+        <span class="gradient-beige">da un piano all'altro.</span>
       </h2>
       <p class="section-subtitle fade-up delay-2">
-        Un assistente AI risponde al posto tuo con un tono professionale,
-        raccoglie le informazioni e ti inoltra solo le richieste importanti.
-        Tu continui a lavorare.
+        Tutto quello che c'&egrave; dentro ogni pacchetto, riga per riga.
       </p>
 
-      <div class="ai-grid">
-        <div>
-          <ul class="ai-features">
-            <li class="fade-up">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
-              <span><strong>Risponde 24 ore su 24.</strong> Anche di sera, il sabato
-              e mentre hai le mani occupate.</span>
-            </li>
-            <li class="fade-up delay-1">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/></svg>
-              <span><strong>Risponde alle domande frequenti.</strong> Orari, zone
-              servite, tipi di intervento, tempi di attesa.</span>
-            </li>
-            <li class="fade-up delay-2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
-              <span><strong>Raccoglie i dati del cliente.</strong> Nome, telefono,
-              indirizzo e cosa gli serve, scritti e pronti.</span>
-            </li>
-            <li class="fade-up delay-3">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
-              <span><strong>Prenota gli appuntamenti.</strong> Si collega al tuo
-              calendario e fissa senza sovrapposizioni.</span>
-            </li>
-            <li class="fade-up delay-4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
-              <span><strong>Ti passa le urgenze.</strong> Se serve subito,
-              la chiamata arriva a te. Il resto aspetta.</span>
-            </li>
-            <li class="fade-up delay-5">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg>
-              <span><strong>Report mensile delle chiamate.</strong> Quante ne sono
-              arrivate, cosa chiedevano, quante hai chiuso.</span>
-            </li>
+      <div class="matrix-scroll fade-up delay-2">
+        <table class="matrix">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Starter &mdash; 460&nbsp;&euro;</th>
+              <th scope="col" class="hi">Professional &mdash; 660&nbsp;&euro;</th>
+              <th scope="col">Premium &mdash; 860&nbsp;&euro;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Pagine</th>
+              <td>Fino a 5</td>
+              <td class="hi">Fino a 10</td>
+              <td>Illimitate</td>
+            </tr>
+            <tr>
+              <th scope="row">Design</th>
+              <td>Responsive</td>
+              <td class="hi">Premium + animazioni</td>
+              <td>UX/UI su misura</td>
+            </tr>
+            <tr>
+              <th scope="row">SEO</th>
+              <td>Base</td>
+              <td class="hi">On-page</td>
+              <td>Tecnico + contenuti</td>
+            </tr>
+            <tr>
+              <th scope="row">Integrazioni</th>
+              <td>Social</td>
+              <td class="hi">Analytics, CRM</td>
+              <td>CRM, API, avanzate</td>
+            </tr>
+            <tr>
+              <th scope="row">Form di contatto</th>
+              <td><span class="tick">&#10003;</span></td>
+              <td class="hi"><span class="tick">&#10003;</span></td>
+              <td><span class="tick">&#10003;</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Performance ottimizzate</th>
+              <td><span class="cross">&mdash;</span></td>
+              <td class="hi"><span class="tick">&#10003;</span></td>
+              <td><span class="tick">&#10003;</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Funzionalit&agrave; su misura</th>
+              <td><span class="cross">&mdash;</span></td>
+              <td class="hi"><span class="cross">&mdash;</span></td>
+              <td><span class="tick">&#10003;</span></td>
+            </tr>
+            <tr>
+              <th scope="row">Revisioni incluse</th>
+              <td>2</td>
+              <td class="hi">4</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <th scope="row">Supporto</th>
+              <td>Via email</td>
+              <td class="hi">3 mesi gratuito</td>
+              <td>6 mesi prioritario</td>
+            </tr>
+            <tr>
+              <th scope="row">Consegna</th>
+              <td>10 giorni</td>
+              <td class="hi">15 giorni</td>
+              <td>20 giorni</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="matrix-hint fade-up">Scorri la tabella per vedere tutte le colonne</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Marea Care -->
+  <section id="care">
+    <div class="container">
+      <p class="section-label fade-up">Marea Care</p>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Il sito non finisce<br>
+        <span class="gradient-beige">quando va online.</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Ha bisogno di manutenzione per restare sicuro, aggiornato e veloce
+        nel tempo. Attivabile quando vuoi, si disdice con 30 giorni di preavviso.
+      </p>
+
+      <div class="care-grid">
+        <div class="care-card glass fade-up">
+          <div class="price-name">Base</div>
+          <div class="care-value">29&nbsp;&euro;<small>/mese</small></div>
+          <ul class="care-list">
+            <li><strong>Hosting e dominio</strong> gestiti</li>
+            <li>Backup automatico mensile</li>
+            <li>Aggiornamenti di sicurezza</li>
+            <li>Monitoraggio uptime</li>
+            <li><strong>1 modifica</strong> al mese</li>
+            <li>Supporto via email</li>
           </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20a%20Marea%20Care%20Base%20da%2029%E2%82%AC%20al%20mese" class="price-cta" target="_blank" rel="noopener">Attiva Base</a>
         </div>
 
-        <div class="ai-price glass fade-up delay-2">
-          <div class="price-name">AI Receptionist</div>
-          <div class="ai-price-main">
-            <span class="amount">99&nbsp;&euro;</span>
-            <span class="per">/ mese</span>
-          </div>
-          <div class="price-terms">Disdici quando vuoi</div>
-
-          <div class="ai-setup">
-            <strong>+ 299 &euro; di setup</strong> una tantum: configuriamo la voce,
-            i flussi di conversazione, il collegamento al calendario
-            e testiamo tutto insieme prima di attivare.
-          </div>
-
-          <ul class="ai-included">
-            <li>Numero dedicato o deviazione dal tuo</li>
-            <li>Personalizzazione su misura della tua attivit&agrave;</li>
-            <li>Aggiornamenti e manutenzione inclusi</li>
-            <li>Assistenza diretta via WhatsApp</li>
+        <div class="care-card glass featured fade-up delay-1">
+          <span class="price-badge">Consigliato</span>
+          <div class="price-name">Plus</div>
+          <div class="care-value">49&nbsp;&euro;<small>/mese</small></div>
+          <ul class="care-list">
+            <li>Tutto incluso in <strong>Base</strong></li>
+            <li>Backup <strong>settimanale</strong></li>
+            <li>Fino a <strong>3 modifiche</strong> al mese</li>
+            <li>Aggiornamento testi e foto</li>
+            <li>Report mensile di performance</li>
+            <li><strong>Supporto prioritario</strong> WhatsApp</li>
           </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20a%20Marea%20Care%20Plus%20da%2049%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Attiva Plus</a>
+        </div>
 
-          <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20sapere%20come%20funziona%20l%27AI%20Receptionist%20da%2099%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Provalo sulla tua attivit&agrave;</a>
-          <p style="font-size:0.76rem;color:var(--grey-dark);line-height:1.5;margin-top:16px;text-align:center">
-            Ti facciamo sentire una chiamata di prova
-            prima che decidi qualsiasi cosa.
-          </p>
+        <div class="care-card glass fade-up delay-2">
+          <div class="price-name">Premium</div>
+          <div class="care-value">79&nbsp;&euro;<small>/mese</small></div>
+          <ul class="care-list">
+            <li>Tutto incluso in <strong>Plus</strong></li>
+            <li><strong>Modifiche illimitate</strong> ragionevoli</li>
+            <li>Nuove sezioni su richiesta</li>
+            <li><strong>SEO continuativa</strong></li>
+            <li>Interventi <strong>entro 24h</strong></li>
+          </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20a%20Marea%20Care%20Premium%20da%2079%E2%82%AC%20al%20mese" class="price-cta" target="_blank" rel="noopener">Attiva Premium</a>
+        </div>
+      </div>
+
+      <p class="care-note fade-up">
+        Care &egrave; facoltativo: il sito resta tuo anche senza.
+        Serve se vuoi che qualcuno se ne occupi al posto tuo.
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Trova il tuo piano -->
+  <section id="consiglio">
+    <div class="container">
+      <p class="section-label fade-up">Non sai quale scegliere?</p>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Tre domande e<br>
+        <span class="gradient-beige">ti diciamo quale ti serve.</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Nessuna email richiesta. Rispondi e vedi subito il consiglio.
+      </p>
+
+      <div class="quiz glass fade-up delay-2" id="quiz">
+        <div class="quiz-step" data-q="sito">
+          <div class="quiz-q"><span class="n">01</span> Quante cose devi raccontare?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-v="starter">Chi sono e come contattarmi, basta</button>
+            <button type="button" class="quiz-opt" data-v="professional">Servizi, listino e qualche lavoro fatto</button>
+            <button type="button" class="quiz-opt" data-v="premium">Tanto, e voglio poter crescere nel tempo</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-q="care">
+          <div class="quiz-q"><span class="n">02</span> Chi tiene aggiornato il sito dopo?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-v="base">Lo lascio com'&egrave;, cambia poco</button>
+            <button type="button" class="quiz-opt" data-v="plus">Qualche modifica ogni tanto</button>
+            <button type="button" class="quiz-opt" data-v="premium">Cambio spesso foto, testi e offerte</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-q="ai">
+          <div class="quiz-q"><span class="n">03</span> Ti squilla il telefono mentre lavori?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-v="si">Di continuo, e perdo chiamate</button>
+            <button type="button" class="quiz-opt" data-v="forse">Ogni tanto, non sempre rispondo</button>
+            <button type="button" class="quiz-opt" data-v="no">No, riesco a rispondere sempre</button>
+          </div>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <h4 id="quizTitle"></h4>
+          <p id="quizWhy"></p>
+          <div class="quiz-picks" id="quizPicks"></div>
+          <a href="#" class="price-cta solid" id="quizCta" target="_blank" rel="noopener">Parlane con noi su WhatsApp</a>
         </div>
       </div>
     </div>
@@ -2446,11 +3040,12 @@
         </div>
         <div class="footer-col">
           <h4>Navigazione</h4>
-          <a href="#perche">Perch&eacute; noi</a>
-          <a href="#processo">Come lavoriamo</a>
-          <a href="#prezzi">Prezzi</a>
           <a href="#receptionist">AI Receptionist</a>
-          <a href="#perchi">Per chi</a>
+          <a href="#confronto">Perch&eacute; noi</a>
+          <a href="#prezzi">Siti e prezzi</a>
+          <a href="#piani">Confronto piani</a>
+          <a href="#care">Marea Care</a>
+          <a href="#consiglio">Che piano fa per me</a>
           <a href="#testimonianze">Recensioni</a>
         </div>
         <div class="footer-col">
@@ -2460,6 +3055,7 @@
         </div>
         <div class="footer-col">
           <h4>Zona operativa</h4>
+          <p>Beinette, Via Martiri (CN)</p>
           <p>Cuneo e provincia</p>
           <p>Saluzzo, Bra, Alba, Fossano</p>
           <p>Mondov&igrave;, Savigliano</p>
@@ -2588,6 +3184,99 @@
 
       window.addEventListener('resize', centra, { passive: true });
       centra();
+    })();
+
+    /* ─── Quiz: consiglia sito, care e AI ─── */
+    (function () {
+      var quiz = document.getElementById('quiz');
+      if (!quiz) return;
+
+      var scelte = {};
+
+      var siti = {
+        starter:      { nome: 'Starter', prezzo: '460 €' },
+        professional: { nome: 'Professional', prezzo: '660 €' },
+        premium:      { nome: 'Premium', prezzo: '860 €' }
+      };
+      var cure = {
+        base:    { nome: 'Care Base', prezzo: '29 €/mese' },
+        plus:    { nome: 'Care Plus', prezzo: '49 €/mese' },
+        premium: { nome: 'Care Premium', prezzo: '79 €/mese' }
+      };
+
+      var motivi = {
+        starter:      'Con poche cose da dire, una pagina sola fatta bene rende più di cinque mezze vuote.',
+        professional: 'Servizi e lavori da mostrare vogliono pagine separate, altrimenti si pestano i piedi tra loro.',
+        premium:      'Se il sito deve crescere, conviene partire con una struttura che regge senza rifarlo tra un anno.'
+      };
+
+      quiz.addEventListener('click', function (e) {
+        var btn = e.target.closest('.quiz-opt');
+        if (!btn) return;
+
+        var step = btn.closest('.quiz-step');
+        step.querySelectorAll('.quiz-opt').forEach(function (b) { b.classList.remove('on'); });
+        btn.classList.add('on');
+        scelte[step.dataset.q] = btn.dataset.v;
+
+        if (scelte.sito && scelte.care && scelte.ai) mostra();
+      });
+
+      function mostra() {
+        var sito = siti[scelte.sito];
+        var cura = cure[scelte.care];
+        var vuoleAi = scelte.ai === 'si';
+        var forseAi = scelte.ai === 'forse';
+
+        document.getElementById('quizTitle').textContent =
+          'Per te: ' + sito.nome + ' + ' + cura.nome;
+
+        var perche = motivi[scelte.sito] + ' ';
+        if (scelte.care === 'base') {
+          perche += 'Visto che cambia poco, ti basta la manutenzione essenziale.';
+        } else if (scelte.care === 'plus') {
+          perche += 'Con qualche modifica ogni tanto, Plus copre tre interventi al mese senza chiamare ogni volta.';
+        } else {
+          perche += 'Cambiando spesso i contenuti, le modifiche illimitate si ripagano da sole.';
+        }
+        if (vuoleAi) {
+          perche += ' E se perdi chiamate di continuo, l’AI Receptionist è la voce che ti manca.';
+        } else if (forseAi) {
+          perche += ' L’AI Receptionist può aspettare: valutalo quando le chiamate perse iniziano a pesare.';
+        }
+        document.getElementById('quizWhy').textContent = perche;
+
+        var picks = document.getElementById('quizPicks');
+        picks.innerHTML = '';
+        aggiungi(picks, sito.nome + ' — ' + sito.prezzo, false);
+        aggiungi(picks, cura.nome + ' — ' + cura.prezzo, false);
+        if (vuoleAi) {
+          aggiungi(picks, 'AI Receptionist — 99 €/mese', false);
+        } else if (forseAi) {
+          aggiungi(picks, 'AI Receptionist — da valutare', true);
+        }
+
+        var testo = 'Ciao, ho fatto il test sul sito. Mi interessa ' + sito.nome +
+                    ' con ' + cura.nome + (vuoleAi ? ' e l’AI Receptionist' : '') + '.';
+        document.getElementById('quizCta').href =
+          'https://wa.me/393505920776?text=' + encodeURIComponent(testo);
+
+        var box = document.getElementById('quizResult');
+        if (!box.classList.contains('show')) {
+          box.classList.add('show');
+          setTimeout(function () {
+            var top = box.getBoundingClientRect().top + window.pageYOffset - 140;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }, 90);
+        }
+      }
+
+      function aggiungi(cont, testo, smorzato) {
+        var s = document.createElement('span');
+        s.className = 'quiz-pick' + (smorzato ? ' muted' : '');
+        s.textContent = testo;
+        cont.appendChild(s);
+      }
     })();
 
     /* ─── Recensioni: apri/chiudi form ─── */
