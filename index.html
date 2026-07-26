@@ -2838,7 +2838,8 @@
           <h4 id="quizTitle"></h4>
           <p id="quizWhy"></p>
           <div class="quiz-picks" id="quizPicks"></div>
-          <a href="#" class="price-cta solid" id="quizCta" target="_blank" rel="noopener">Parlane con noi su WhatsApp</a>
+          <!-- l'href lo imposta il quiz con la combinazione scelta -->
+          <a class="price-cta solid" id="quizCta" target="_blank" rel="noopener">Parlane con noi su WhatsApp</a>
         </div>
       </div>
     </div>
@@ -3110,13 +3111,16 @@
     document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
       anchor.addEventListener('click', function(e) {
         var href = this.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
+        // L'href puo' cambiare dopo il caricamento: il bottone del quiz, per
+        // esempio, diventa un link WhatsApp. Il listener resta agganciato,
+        // quindi va ricontrollato qui che sia ancora un'ancora interna,
+        // altrimenti bloccheremmo la navigazione verso un link esterno.
+        if (!href || href.charAt(0) !== '#' || href === '#') return;
         var target = document.querySelector(href);
-        if (target) {
-          var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-        }
+        if (!target) return;
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
       });
     });
 
