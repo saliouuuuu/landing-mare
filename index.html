@@ -336,6 +336,10 @@
       font-weight: 400;
     }
 
+    .hero h1 .hero-line {
+      display: block;
+    }
+
     .hero p {
       font-size: clamp(1rem, 2vw, 1.1rem);
       color: var(--grey-light);
@@ -357,22 +361,134 @@
       position: relative;
     }
 
-    .hero-visual img {
+    /* Spotlight reveal: base spenta, colore rivelato dal cursore */
+    .reveal-wrap {
+      --mx: 50%;
+      --my: 50%;
+      --r: 220px;
+      position: relative;
       width: 100%;
       max-width: 520px;
       border-radius: var(--radius);
+      overflow: hidden;
       box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+      cursor: crosshair;
     }
 
-    .hero-visual::before {
+    .reveal-base,
+    .reveal-top {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius);
+    }
+
+    /* strato di partenza: il sito "spento" */
+    .reveal-base {
+      filter: grayscale(1) brightness(0.5) contrast(1.08);
+    }
+
+    /* strato rivelato: a colori, visibile solo dentro lo spotlight */
+    .reveal-top {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      -webkit-mask-image: radial-gradient(
+        circle var(--r) at var(--mx) var(--my),
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,1) 40%,
+        rgba(255,255,255,0.75) 60%,
+        rgba(255,255,255,0.4) 75%,
+        rgba(255,255,255,0.12) 88%,
+        rgba(255,255,255,0) 100%
+      );
+      mask-image: radial-gradient(
+        circle var(--r) at var(--mx) var(--my),
+        rgba(255,255,255,1) 0%,
+        rgba(255,255,255,1) 40%,
+        rgba(255,255,255,0.75) 60%,
+        rgba(255,255,255,0.4) 75%,
+        rgba(255,255,255,0.12) 88%,
+        rgba(255,255,255,0) 100%
+      );
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+    }
+
+    .reveal-hint {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 15px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--beige);
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(232, 213, 183, 0.2);
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      white-space: nowrap;
+    }
+
+    .reveal-wrap.touched .reveal-hint { opacity: 0; }
+
+    .reveal-wrap::after {
       content: '';
       position: absolute;
-      inset: -1px;
-      max-width: 522px;
-      margin: 0 auto;
+      inset: 0;
       border-radius: var(--radius);
-      background: linear-gradient(135deg, rgba(232, 213, 183, 0.15), transparent 50%);
+      background: linear-gradient(135deg, rgba(232, 213, 183, 0.14), transparent 52%);
       pointer-events: none;
+    }
+
+    /* Senza mouse (telefono/tablet): niente maschera, immagine a colori */
+    @media (hover: none), (pointer: coarse) {
+      .reveal-base { filter: none; }
+      .reveal-top,
+      .reveal-hint { display: none; }
+      .reveal-wrap { cursor: default; }
+    }
+
+    /* ─── Animazioni di ingresso hero ─── */
+    @keyframes heroReveal {
+      0%   { opacity: 0; transform: translateY(28px); filter: blur(12px); }
+      100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+    }
+
+    @keyframes heroFadeUp {
+      0%   { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroZoom {
+      0%   { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    .hero-anim {
+      opacity: 0;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-reveal { animation-name: heroReveal; animation-duration: 1.1s; }
+    .hero-fade   { animation-name: heroFadeUp; animation-duration: 1s; }
+    .hero-zoom   { animation: heroZoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-anim, .hero-zoom { animation: none; opacity: 1; transform: none; filter: none; }
+      .reveal-top { display: none; }
+      .reveal-base { filter: none; }
     }
 
     .btn-primary {
@@ -698,11 +814,650 @@
       color: var(--grey);
     }
 
+    /* ─── Listino prezzi ─── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .price-card {
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .price-card.featured {
+      border-color: rgba(232, 213, 183, 0.28);
+      background: rgba(232, 213, 183, 0.035);
+    }
+
+    .price-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 5px 13px;
+      border-radius: 50px;
+      font-size: 0.63rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      background: var(--beige);
+      color: var(--black);
+    }
+
+    .price-name {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--beige);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .price-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      margin-bottom: 6px;
+      background: linear-gradient(120deg, #ffffff 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .price-value small {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--grey);
+      letter-spacing: 0;
+      margin-left: 4px;
+    }
+
+    .price-terms {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--grey);
+      margin-bottom: 22px;
+    }
+
+    .price-tagline {
+      font-size: 0.86rem;
+      color: var(--grey-light);
+      line-height: 1.6;
+      margin-bottom: 26px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    /* Riga garanzie */
+    .trust-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 48px;
+      background: var(--glass-border);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 20px;
+      background: var(--black);
+    }
+
+    .trust-item svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--beige);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .trust-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--grey);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .price-list {
+      list-style: none;
+      margin-bottom: 28px;
+      flex-grow: 1;
+    }
+
+    .price-list li {
+      font-size: 0.86rem;
+      color: var(--grey-light);
+      line-height: 1.5;
+      padding: 8px 0 8px 26px;
+      position: relative;
+    }
+
+    .price-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 13px;
+      height: 7px;
+      border-left: 1.5px solid var(--beige);
+      border-bottom: 1.5px solid var(--beige);
+      transform: rotate(-45deg);
+    }
+
+    .price-list li strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .price-cta {
+      display: block;
+      text-align: center;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+    }
+
+    .price-cta:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .price-cta.solid {
+      background: var(--beige);
+      color: var(--black);
+      border-color: transparent;
+    }
+
+    .price-cta.solid:hover {
+      background: var(--beige-light);
+      box-shadow: 0 8px 26px rgba(232, 213, 183, 0.14);
+    }
+
+    .pricing-extra {
+      margin-top: 32px;
+      font-size: 0.86rem;
+      color: var(--grey);
+      line-height: 1.7;
+      text-align: center;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Confronto valore */
+    .value-compare {
+      margin-top: 72px;
+      padding: 40px 32px;
+    }
+
+    .value-compare h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .value-compare > p {
+      font-size: 0.92rem;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 620px;
+      margin-bottom: 36px;
+    }
+
+    .compare-rows {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .compare-row {
+      padding: 22px 24px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--glass-border);
+    }
+
+    .compare-row.highlight {
+      background: rgba(232, 213, 183, 0.05);
+      border-color: rgba(232, 213, 183, 0.22);
+    }
+
+    .compare-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .compare-who {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .compare-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      white-space: nowrap;
+      color: var(--grey);
+    }
+
+    .compare-row.highlight .compare-price {
+      background: linear-gradient(135deg, var(--beige-light), var(--beige-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .compare-desc {
+      font-size: 0.84rem;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    .price-note {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .price-note span {
+      font-size: 0.78rem;
+      color: var(--grey-light);
+      padding: 9px 18px;
+      border-radius: 50px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* ─── AI Receptionist ─── */
+    .ai-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-section::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232, 213, 183, 0.05) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 48px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      background: rgba(232, 213, 183, 0.1);
+      border: 1px solid rgba(232, 213, 183, 0.2);
+      color: var(--beige);
+      margin-bottom: 22px;
+    }
+
+    .ai-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .ai-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      font-size: 0.88rem;
+      color: var(--grey-light);
+      line-height: 1.5;
+      transition: var(--transition);
+    }
+
+    .ai-features li:hover {
+      background: var(--glass-bg-hover);
+      border-color: rgba(255,255,255,0.11);
+    }
+
+    .ai-features svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      color: var(--beige);
+      margin-top: 1px;
+    }
+
+    .ai-features strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* Card prezzo AI */
+    .ai-price {
+      padding: 36px 30px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .ai-price .price-name {
+      margin-bottom: 14px;
+    }
+
+    .ai-price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .ai-price-main .amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      background: linear-gradient(120deg, #ffffff 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ai-price-main .per {
+      font-size: 0.9rem;
+      color: var(--grey);
+    }
+
+    .ai-setup {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(232, 213, 183, 0.06);
+      border: 1px solid rgba(232, 213, 183, 0.16);
+      margin: 22px 0 26px;
+      line-height: 1.5;
+    }
+
+    .ai-setup strong {
+      color: var(--beige-light);
+      font-weight: 600;
+    }
+
+    .ai-included {
+      list-style: none;
+      margin-bottom: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .ai-included li {
+      font-size: 0.83rem;
+      color: var(--grey);
+      line-height: 1.5;
+      padding: 6px 0 6px 22px;
+      position: relative;
+    }
+
+    .ai-included li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 11px;
+      height: 6px;
+      border-left: 1.5px solid var(--beige-dark);
+      border-bottom: 1.5px solid var(--beige-dark);
+      transform: rotate(-45deg);
+    }
+
+    /* ─── Rating aggregato ─── */
+    .rating-summary {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-top: 36px;
+      padding: 24px 28px;
+      border-radius: var(--radius);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+    }
+
+    .rating-score {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--beige-light), var(--beige-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .rating-meta .rating-stars {
+      color: var(--beige);
+      letter-spacing: 3px;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .rating-meta p {
+      font-size: 0.82rem;
+      color: var(--grey);
+    }
+
+    .rating-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--glass-border);
+    }
+
+    .rating-cta {
+      margin-left: auto;
+    }
+
+    /* ─── Form recensione ─── */
+    .review-form-wrap {
+      margin-top: 24px;
+      padding: 36px 28px;
+      display: none;
+    }
+
+    .review-form-wrap.open {
+      display: block;
+      animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .review-form-wrap h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+
+    .review-form-wrap > p {
+      font-size: 0.86rem;
+      color: var(--grey);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--grey-light);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.92rem;
+      transition: var(--transition);
+      resize: vertical;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: var(--grey-dark);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: rgba(232, 213, 183, 0.4);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Star picker */
+    .star-picker {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .star-picker button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      font-size: 1.7rem;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.16);
+      transition: color 0.18s ease, transform 0.18s ease;
+    }
+
+    .star-picker button:hover {
+      transform: scale(1.15);
+    }
+
+    .star-picker button.on {
+      color: var(--beige);
+    }
+
+    .star-hint {
+      font-size: 0.8rem;
+      color: var(--grey);
+      margin-left: 10px;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .form-privacy {
+      font-size: 0.75rem;
+      color: var(--grey-dark);
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    .form-hp {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .form-feedback {
+      margin-top: 18px;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .form-feedback.show { display: block; }
+
+    .form-feedback.ok {
+      background: rgba(232, 213, 183, 0.08);
+      border: 1px solid rgba(232, 213, 183, 0.28);
+      color: var(--beige-light);
+    }
+
+    .form-feedback.err {
+      background: rgba(255, 95, 87, 0.07);
+      border: 1px solid rgba(255, 95, 87, 0.25);
+      color: #ffb3ae;
+    }
+
     /* ─── CTA Final ─── */
     .cta-section {
       text-align: center;
       padding: 140px 0;
       position: relative;
+      overflow: hidden;
     }
 
     .cta-section::before {
@@ -880,6 +1635,10 @@
       .testimonials-grid { grid-template-columns: 1fr 1fr; }
       .audience-grid { grid-template-columns: repeat(3, 1fr); }
       .showcase-stats { grid-template-columns: repeat(4, 1fr); }
+      .form-row.two { grid-template-columns: 1fr 1fr; }
+      .compare-rows { grid-template-columns: repeat(3, 1fr); }
+      .trust-row { grid-template-columns: repeat(4, 1fr); }
+      .ai-features { grid-template-columns: 1fr 1fr; }
     }
 
     @media (min-width: 900px) {
@@ -889,6 +1648,10 @@
       .process-grid { grid-template-columns: repeat(4, 1fr); }
       .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
       .audience-grid { grid-template-columns: repeat(6, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+      .ai-grid { grid-template-columns: 1.35fr 1fr; gap: 56px; }
+      .ai-features { grid-template-columns: 1fr; }
+      .review-form-wrap { padding: 44px 40px; }
       .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
       .footer-bottom { flex-direction: row; justify-content: space-between; }
       .hero .container {
@@ -914,7 +1677,8 @@
       <ul class="nav-links">
         <li><a href="#perche">Perch&eacute; noi</a></li>
         <li><a href="#processo">Come lavoriamo</a></li>
-        <li><a href="#perchi">Per chi</a></li>
+        <li><a href="#prezzi">Prezzi</a></li>
+        <li><a href="#receptionist">AI Receptionist</a></li>
         <li><a href="#testimonianze">Recensioni</a></li>
         <li>
           <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="nav-cta" target="_blank" rel="noopener">
@@ -934,6 +1698,8 @@
     <a href="#perche" onclick="closeMobile()">Perch&eacute; noi</a>
     <a href="#processo" onclick="closeMobile()">Come lavoriamo</a>
     <a href="#perchi" onclick="closeMobile()">Per chi</a>
+    <a href="#prezzi" onclick="closeMobile()">Prezzi</a>
+    <a href="#receptionist" onclick="closeMobile()">AI Receptionist</a>
     <a href="#testimonianze" onclick="closeMobile()">Recensioni</a>
     <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="btn-primary" target="_blank" rel="noopener" style="margin-top: 16px;">
       Preventivo gratuito
@@ -944,19 +1710,19 @@
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-badge glass fade-up">
+        <div class="hero-badge glass hero-anim hero-fade" style="animation-delay:0.1s">
           <span class="dot"></span>
           Web design &mdash; Cuneo e provincia
         </div>
-        <h1 class="serif fade-up delay-1">
-          <span class="gradient-text">Il tuo sito ti sta<br>facendo perdere</span><br>
-          <span class="gradient-beige">clienti?</span>
+        <h1 class="serif">
+          <span class="hero-line gradient-text hero-anim hero-reveal" style="animation-delay:0.25s">Il tuo sito ti sta<br>facendo perdere</span>
+          <span class="hero-line gradient-beige hero-anim hero-reveal" style="animation-delay:0.42s">clienti?</span>
         </h1>
-        <p class="fade-up delay-2">
+        <p class="hero-anim hero-fade" style="animation-delay:0.6s">
           Creiamo siti web professionali per piccole imprese e artigiani
           che vogliono farsi trovare online. Niente template. Niente sorprese.
         </p>
-        <div class="hero-actions fade-up delay-3">
+        <div class="hero-actions hero-anim hero-fade" style="animation-delay:0.75s">
           <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="btn-primary" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Preventivo gratuito
@@ -967,8 +1733,15 @@
           </a>
         </div>
       </div>
-      <div class="hero-visual fade-up delay-2">
-        <img src="images/hero-mockup.jpeg" alt="Marea Creative — siti web professionali">
+      <div class="hero-visual hero-anim hero-fade" style="animation-delay:0.5s">
+        <div class="reveal-wrap hero-zoom" id="revealWrap">
+          <img class="reveal-base" src="images/hero-mockup.jpeg" alt="Marea Creative — siti web professionali">
+          <div class="reveal-top" style="background-image:url('images/hero-mockup.jpeg')" aria-hidden="true"></div>
+          <span class="reveal-hint">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/><circle cx="12" cy="12" r="4"/></svg>
+            Muovi il mouse
+          </span>
+        </div>
       </div>
     </div>
     <div class="scroll-indicator">
@@ -1236,14 +2009,352 @@
 
   <div class="section-divider"></div>
 
-  <!-- Testimonials -->
+  <!-- Listino prezzi -->
+  <section id="prezzi">
+    <div class="container">
+      <p class="section-label fade-up">Listino</p>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Prezzi chiari,<br>
+        <span class="gradient-beige">scritti prima di iniziare.</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Nessun costo a sorpresa, nessun canone mensile obbligatorio.
+        Sai quanto spendi prima di firmare.
+      </p>
+
+      <div class="pricing-grid">
+        <div class="price-card glass fade-up">
+          <div class="price-name">Starter</div>
+          <div class="price-value">460&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
+          <p class="price-tagline">
+            Il sito che ti serve per esistere online e farti trovare.
+            Perfetto per chi parte da zero.
+          </p>
+          <ul class="price-list">
+            <li>Fino a <strong>5 pagine</strong></li>
+            <li>Design <strong>responsive</strong></li>
+            <li>Form di contatto</li>
+            <li>Ottimizzazione <strong>SEO base</strong></li>
+            <li>Integrazione social</li>
+            <li>2 revisioni incluse</li>
+            <li>Consegna in <strong>10 giorni</strong> lavorativi</li>
+            <li>Supporto via email</li>
+          </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Starter%20da%20460%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Inizia ora</a>
+        </div>
+
+        <div class="price-card glass featured fade-up delay-1">
+          <span class="price-badge">Pi&ugrave; scelto</span>
+          <div class="price-name">Professional</div>
+          <div class="price-value">660&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
+          <p class="price-tagline">
+            Per chi ha pi&ugrave; da raccontare: servizi, listini, gallerie.
+            Il sito diventa uno strumento di vendita.
+          </p>
+          <ul class="price-list">
+            <li>Fino a <strong>10 pagine</strong></li>
+            <li>Design <strong>premium + animazioni</strong></li>
+            <li>SEO ottimizzato (on-page)</li>
+            <li>Integrazione strumenti (Analytics, CRM)</li>
+            <li>Velocit&agrave; e performance ottimizzate</li>
+            <li>4 revisioni incluse</li>
+            <li><strong>3 mesi di supporto</strong> gratuito</li>
+            <li>Consegna in <strong>15 giorni</strong> lavorativi</li>
+          </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Professional%20da%20660%E2%82%AC" class="price-cta solid" target="_blank" rel="noopener">Inizia ora</a>
+        </div>
+
+        <div class="price-card glass fade-up delay-2">
+          <div class="price-name">Premium</div>
+          <div class="price-value">860&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
+          <p class="price-tagline">
+            Il pacchetto completo, per chi vuole che il sito
+            lavori davvero e porti richieste ogni mese.
+          </p>
+          <ul class="price-list">
+            <li><strong>Pagine illimitate</strong></li>
+            <li>UX/UI avanzata e personalizzata</li>
+            <li><strong>SEO completo</strong> (tecnico + contenuti)</li>
+            <li>Integrazioni avanzate (CRM, API, ecc.)</li>
+            <li>Funzionalit&agrave; su misura</li>
+            <li>6 revisioni incluse</li>
+            <li><strong>6 mesi di supporto</strong> prioritario</li>
+            <li>Consegna in <strong>20 giorni</strong> lavorativi</li>
+          </ul>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Premium%20da%20860%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Inizia ora</a>
+        </div>
+      </div>
+
+      <!-- Garanzie -->
+      <div class="trust-row fade-up">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div><strong>Siti web sicuri</strong><span>Protezione e affidabilit&agrave;</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div><strong>Performance al top</strong><span>Velocit&agrave; e stabilit&agrave;</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 14v-3a8 8 0 0116 0v3"/><path d="M4 14a2 2 0 012-2h1v5H6a2 2 0 01-2-2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2z"/><path d="M18 17v1a3 3 0 01-3 3h-2"/></svg>
+          <div><strong>Supporto dedicato</strong><span>Sempre al tuo fianco</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          <div><strong>Nessun costo nascosto</strong><span>Trasparenza totale</span></div>
+        </div>
+      </div>
+
+      <p class="pricing-extra fade-up">
+        Serve un e-commerce, un'area riservata o un collegamento al tuo
+        gestionale? Sono progetti a s&eacute;: ne parliamo e ti facciamo un
+        preventivo dedicato, senza impegno.
+      </p>
+
+      <!-- Giustificazione del prezzo -->
+      <div class="value-compare glass fade-up">
+        <h3 class="gradient-text">Perch&eacute; 460&euro; e non 99&euro;</h3>
+        <p>
+          Perch&eacute; a 99&euro; ti danno un template compilato in mezz'ora,
+          identico a mille altri e lento da caricare. E perch&eacute; a 2.500&euro;
+          paghi la struttura di un'agenzia, non il tuo sito. Noi stiamo in mezzo,
+          e questo &egrave; il motivo.
+        </p>
+        <div class="compare-rows">
+          <div class="compare-row">
+            <div class="compare-head">
+              <span class="compare-who">Template fai-da-te</span>
+              <span class="compare-price">99&euro;</span>
+            </div>
+            <p class="compare-desc">
+              Grafica riciclata, testi generici, caricamento lento.
+              Il lavoro di scrivere e configurare resta tutto a te.
+            </p>
+          </div>
+          <div class="compare-row highlight">
+            <div class="compare-head">
+              <span class="compare-who">Marea Starter</span>
+              <span class="compare-price">460&euro;</span>
+            </div>
+            <p class="compare-desc">
+              Disegnato sulla tua attivit&agrave;, scritto insieme a te,
+              online in due settimane. Parli con chi lo costruisce.
+            </p>
+          </div>
+          <div class="compare-row">
+            <div class="compare-head">
+              <span class="compare-who">Agenzia strutturata</span>
+              <span class="compare-price">2.500&euro;+</span>
+            </div>
+            <p class="compare-desc">
+              Qualit&agrave; alta ma tempi lunghi, un account che fa da tramite
+              e un preventivo pensato per aziende pi&ugrave; grandi.
+            </p>
+          </div>
+        </div>
+        <div class="price-note">
+          <span>Demo gratuita prima di pagare</span>
+          <span>Pagamento una tantum, non un abbonamento</span>
+          <span>Il sito &egrave; tuo, non in affitto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- AI Receptionist -->
+  <section class="ai-section" id="receptionist">
+    <div class="container">
+      <span class="ai-tag fade-up">
+        <span class="dot" style="width:6px;height:6px;background:var(--beige);border-radius:50%;animation:pulse 2s infinite"></span>
+        Novit&agrave;
+      </span>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Non puoi fermarti ogni volta<br>
+        <span class="gradient-beige">che squilla il telefono?</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Un assistente AI risponde al posto tuo con un tono professionale,
+        raccoglie le informazioni e ti inoltra solo le richieste importanti.
+        Tu continui a lavorare.
+      </p>
+
+      <div class="ai-grid">
+        <div>
+          <ul class="ai-features">
+            <li class="fade-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+              <span><strong>Risponde 24 ore su 24.</strong> Anche di sera, il sabato
+              e mentre hai le mani occupate.</span>
+            </li>
+            <li class="fade-up delay-1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/></svg>
+              <span><strong>Risponde alle domande frequenti.</strong> Orari, zone
+              servite, tipi di intervento, tempi di attesa.</span>
+            </li>
+            <li class="fade-up delay-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
+              <span><strong>Raccoglie i dati del cliente.</strong> Nome, telefono,
+              indirizzo e cosa gli serve, scritti e pronti.</span>
+            </li>
+            <li class="fade-up delay-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+              <span><strong>Prenota gli appuntamenti.</strong> Si collega al tuo
+              calendario e fissa senza sovrapposizioni.</span>
+            </li>
+            <li class="fade-up delay-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+              <span><strong>Ti passa le urgenze.</strong> Se serve subito,
+              la chiamata arriva a te. Il resto aspetta.</span>
+            </li>
+            <li class="fade-up delay-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg>
+              <span><strong>Report mensile delle chiamate.</strong> Quante ne sono
+              arrivate, cosa chiedevano, quante hai chiuso.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ai-price glass fade-up delay-2">
+          <div class="price-name">AI Receptionist</div>
+          <div class="ai-price-main">
+            <span class="amount">99&nbsp;&euro;</span>
+            <span class="per">/ mese</span>
+          </div>
+          <div class="price-terms">Disdici quando vuoi</div>
+
+          <div class="ai-setup">
+            <strong>+ 299 &euro; di setup</strong> una tantum: configuriamo la voce,
+            i flussi di conversazione, il collegamento al calendario
+            e testiamo tutto insieme prima di attivare.
+          </div>
+
+          <ul class="ai-included">
+            <li>Numero dedicato o deviazione dal tuo</li>
+            <li>Personalizzazione su misura della tua attivit&agrave;</li>
+            <li>Aggiornamenti e manutenzione inclusi</li>
+            <li>Assistenza diretta via WhatsApp</li>
+          </ul>
+
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20sapere%20come%20funziona%20l%27AI%20Receptionist%20da%2099%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Provalo sulla tua attivit&agrave;</a>
+          <p style="font-size:0.76rem;color:var(--grey-dark);line-height:1.5;margin-top:16px;text-align:center">
+            Ti facciamo sentire una chiamata di prova
+            prima che decidi qualsiasi cosa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Recensioni -->
   <section id="testimonianze">
     <div class="container">
-      <p class="section-label fade-up">Cosa dicono di noi</p>
+      <p class="section-label fade-up">Recensioni</p>
       <h2 class="section-title serif gradient-text fade-up delay-1">
-        Clienti soddisfatti,<br>
-        <span class="gradient-beige">risultati concreti.</span>
+        Le parole di chi<br>
+        <span class="gradient-beige">ci ha dato fiducia.</span>
       </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Ogni progetto nasce da una chiacchierata. Qui c'&egrave; cosa
+        &egrave; rimasto ai clienti dopo averla fatta con noi.
+      </p>
+
+      <!-- Rating aggregato + CTA -->
+      <div class="rating-summary fade-up delay-2">
+        <div class="rating-score">5,0</div>
+        <div class="rating-meta">
+          <div class="rating-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>Su 3 recensioni verificate</p>
+        </div>
+        <div class="rating-divider"></div>
+        <div class="rating-cta">
+          <button class="btn-primary" id="reviewToggle" type="button">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg>
+            Lascia una recensione
+          </button>
+        </div>
+      </div>
+
+      <!-- Form recensione -->
+      <div class="review-form-wrap glass" id="reviewFormWrap">
+        <h3 class="gradient-text">Com'&egrave; andata con noi?</h3>
+        <p>
+          Ci metti due minuti e a noi serve davvero. La pubblichiamo qui
+          sul sito dopo una verifica veloce, cos&igrave; chi arriva dopo di te
+          sa con chi sta parlando.
+        </p>
+
+        <form id="reviewForm" name="recensioni" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="recensioni">
+          <p class="form-hp">
+            <label>Non compilare: <input name="bot-field"></label>
+          </p>
+
+          <div class="form-row two">
+            <div class="field">
+              <label for="rev-nome">Nome e cognome</label>
+              <input type="text" id="rev-nome" name="nome" placeholder="Mario Rossi" required>
+            </div>
+            <div class="field">
+              <label for="rev-attivita">La tua attivit&agrave;</label>
+              <input type="text" id="rev-attivita" name="attivita" placeholder="Falegnameria Rossi" required>
+            </div>
+          </div>
+
+          <div class="form-row two">
+            <div class="field">
+              <label for="rev-citta">Comune</label>
+              <input type="text" id="rev-citta" name="citta" placeholder="Cuneo" required>
+            </div>
+            <div class="field">
+              <label for="rev-contatto">Email o telefono</label>
+              <input type="text" id="rev-contatto" name="contatto" placeholder="Per verificare, non lo pubblichiamo" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label>Quanto ci dai</label>
+              <div class="star-picker" id="starPicker">
+                <button type="button" data-v="1" aria-label="1 stella">&#9733;</button>
+                <button type="button" data-v="2" aria-label="2 stelle">&#9733;</button>
+                <button type="button" data-v="3" aria-label="3 stelle">&#9733;</button>
+                <button type="button" data-v="4" aria-label="4 stelle">&#9733;</button>
+                <button type="button" data-v="5" aria-label="5 stelle">&#9733;</button>
+                <span class="star-hint" id="starHint">Tocca le stelle</span>
+              </div>
+              <input type="hidden" name="voto" id="rev-voto" value="">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="rev-testo">La tua recensione</label>
+              <textarea id="rev-testo" name="recensione" rows="5" placeholder="Com'era la tua situazione prima, com'&egrave; andato il lavoro, cosa &egrave; cambiato dopo." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" id="reviewSubmit">Invia la recensione</button>
+            <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20lasciarvi%20una%20recensione" class="btn-secondary" target="_blank" rel="noopener">
+              Preferisci scriverla su WhatsApp? &rarr;
+            </a>
+          </div>
+
+          <div class="form-feedback" id="reviewFeedback"></div>
+
+          <p class="form-privacy">
+            Usiamo il contatto solo per verificare che la recensione sia vera.
+            Non lo pubblichiamo e non lo diamo a nessuno.
+          </p>
+        </form>
+      </div>
 
       <div class="testimonials-grid">
         <div class="testimonial-card glass fade-up">
@@ -1337,6 +2448,8 @@
           <h4>Navigazione</h4>
           <a href="#perche">Perch&eacute; noi</a>
           <a href="#processo">Come lavoriamo</a>
+          <a href="#prezzi">Prezzi</a>
+          <a href="#receptionist">AI Receptionist</a>
           <a href="#perchi">Per chi</a>
           <a href="#testimonianze">Recensioni</a>
         </div>
@@ -1409,6 +2522,168 @@
           window.scrollTo({ top: top, behavior: 'smooth' });
         }
       });
+    });
+
+    /* ─── Spotlight hero: rivela il colore sotto il cursore ─── */
+    (function () {
+      var wrap = document.getElementById('revealWrap');
+      if (!wrap) return;
+
+      // Su touch la maschera e' disattivata dal CSS: non serve il loop.
+      var puoPuntare = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var motoRidotto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!puoPuntare || motoRidotto) return;
+
+      var raw = { x: 0, y: 0 };
+      var eased = { x: 0, y: 0 };
+      var raf = null;
+      var attivo = false;
+
+      // torna al centro lasciando decidere al CSS (50% 50%),
+      // cosi' non si sfalsa mentre lo zoom d'ingresso e' ancora in corso
+      function centra() {
+        wrap.style.removeProperty('--mx');
+        wrap.style.removeProperty('--my');
+        var r = wrap.getBoundingClientRect();
+        raw.x = eased.x = r.width / 2;
+        raw.y = eased.y = r.height / 2;
+      }
+
+      function applica() {
+        wrap.style.setProperty('--mx', eased.x.toFixed(1) + 'px');
+        wrap.style.setProperty('--my', eased.y.toFixed(1) + 'px');
+      }
+
+      function loop() {
+        eased.x += (raw.x - eased.x) * 0.1;
+        eased.y += (raw.y - eased.y) * 0.1;
+        applica();
+        // si ferma da solo quando ha raggiunto il cursore
+        if (Math.abs(raw.x - eased.x) < 0.4 && Math.abs(raw.y - eased.y) < 0.4) {
+          raf = null;
+          return;
+        }
+        raf = requestAnimationFrame(loop);
+      }
+
+      function avvia() {
+        if (raf === null) raf = requestAnimationFrame(loop);
+      }
+
+      wrap.addEventListener('mousemove', function (e) {
+        var r = wrap.getBoundingClientRect();
+        raw.x = e.clientX - r.left;
+        raw.y = e.clientY - r.top;
+        if (!attivo) {
+          attivo = true;
+          wrap.classList.add('touched');
+        }
+        avvia();
+      });
+
+      wrap.addEventListener('mouseleave', function () {
+        if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+        centra();
+      });
+
+      window.addEventListener('resize', centra, { passive: true });
+      centra();
+    })();
+
+    /* ─── Recensioni: apri/chiudi form ─── */
+    var reviewToggle = document.getElementById('reviewToggle');
+    var reviewFormWrap = document.getElementById('reviewFormWrap');
+
+    reviewToggle.addEventListener('click', function() {
+      var isOpen = reviewFormWrap.classList.toggle('open');
+      this.innerHTML = isOpen
+        ? 'Chiudi'
+        : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></svg> Lascia una recensione';
+      if (isOpen) {
+        setTimeout(function() {
+          var top = reviewFormWrap.getBoundingClientRect().top + window.pageYOffset - 100;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }, 80);
+      }
+    });
+
+    /* ─── Star picker ─── */
+    var starButtons = Array.prototype.slice.call(
+      document.querySelectorAll('#starPicker button')
+    );
+    var votoInput = document.getElementById('rev-voto');
+    var starHint = document.getElementById('starHint');
+    var etichette = ['Per niente', 'Poco', 'Nella media', 'Bene', 'Ottimo'];
+    var votoScelto = 0;
+
+    function dipingiStelle(n) {
+      starButtons.forEach(function(b, i) {
+        b.classList.toggle('on', i < n);
+      });
+    }
+
+    starButtons.forEach(function(btn) {
+      btn.addEventListener('mouseenter', function() {
+        dipingiStelle(Number(this.dataset.v));
+      });
+      btn.addEventListener('click', function() {
+        votoScelto = Number(this.dataset.v);
+        votoInput.value = votoScelto;
+        starHint.textContent = etichette[votoScelto - 1];
+        dipingiStelle(votoScelto);
+      });
+    });
+
+    document.getElementById('starPicker').addEventListener('mouseleave', function() {
+      dipingiStelle(votoScelto);
+    });
+
+    /* ─── Invio form recensione ─── */
+    var reviewForm = document.getElementById('reviewForm');
+    var reviewSubmit = document.getElementById('reviewSubmit');
+    var reviewFeedback = document.getElementById('reviewFeedback');
+
+    function mostraEsito(testo, tipo) {
+      reviewFeedback.textContent = testo;
+      reviewFeedback.className = 'form-feedback show ' + tipo;
+    }
+
+    reviewForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (!votoInput.value) {
+        mostraEsito('Manca solo il voto: tocca le stelle qui sopra.', 'err');
+        return;
+      }
+
+      reviewSubmit.disabled = true;
+      reviewSubmit.textContent = 'Invio in corso...';
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(reviewForm)).toString()
+      })
+        .then(function(res) {
+          if (!res.ok) throw new Error('Risposta non valida');
+          reviewForm.reset();
+          votoScelto = 0;
+          dipingiStelle(0);
+          starHint.textContent = 'Tocca le stelle';
+          mostraEsito(
+            'Grazie davvero. Diamo un occhio e la pubblichiamo qui sul sito nei prossimi giorni.',
+            'ok'
+          );
+          reviewSubmit.textContent = 'Inviata';
+        })
+        .catch(function() {
+          mostraEsito(
+            'Non è partita. Scrivici su WhatsApp al 350 592 0776 e la pubblichiamo noi.',
+            'err'
+          );
+          reviewSubmit.disabled = false;
+          reviewSubmit.textContent = 'Riprova';
+        });
     });
   </script>
 
