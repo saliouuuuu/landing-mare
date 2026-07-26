@@ -762,6 +762,14 @@
       margin-left: 4px;
     }
 
+    .price-terms {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--grey);
+      margin-bottom: 22px;
+    }
+
     .price-tagline {
       font-size: 0.86rem;
       color: var(--grey-light);
@@ -769,6 +777,49 @@
       margin-bottom: 26px;
       padding-bottom: 26px;
       border-bottom: 1px solid var(--glass-border);
+    }
+
+    /* Riga garanzie */
+    .trust-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 48px;
+      background: var(--glass-border);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 22px 20px;
+      background: var(--black);
+    }
+
+    .trust-item svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--beige);
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .trust-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--grey);
+      line-height: 1.4;
+      margin-top: 2px;
     }
 
     .price-list {
@@ -930,6 +981,166 @@
       border-radius: 50px;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
+    }
+
+    /* ─── AI Receptionist ─── */
+    .ai-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-section::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232, 213, 183, 0.05) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .ai-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 48px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ai-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      background: rgba(232, 213, 183, 0.1);
+      border: 1px solid rgba(232, 213, 183, 0.2);
+      color: var(--beige);
+      margin-bottom: 22px;
+    }
+
+    .ai-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .ai-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 16px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      font-size: 0.88rem;
+      color: var(--grey-light);
+      line-height: 1.5;
+      transition: var(--transition);
+    }
+
+    .ai-features li:hover {
+      background: var(--glass-bg-hover);
+      border-color: rgba(255,255,255,0.11);
+    }
+
+    .ai-features svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+      color: var(--beige);
+      margin-top: 1px;
+    }
+
+    .ai-features strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    /* Card prezzo AI */
+    .ai-price {
+      padding: 36px 30px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .ai-price .price-name {
+      margin-bottom: 14px;
+    }
+
+    .ai-price-main {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .ai-price-main .amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      background: linear-gradient(120deg, #ffffff 0%, #b8b8b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ai-price-main .per {
+      font-size: 0.9rem;
+      color: var(--grey);
+    }
+
+    .ai-setup {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(232, 213, 183, 0.06);
+      border: 1px solid rgba(232, 213, 183, 0.16);
+      margin: 22px 0 26px;
+      line-height: 1.5;
+    }
+
+    .ai-setup strong {
+      color: var(--beige-light);
+      font-weight: 600;
+    }
+
+    .ai-included {
+      list-style: none;
+      margin-bottom: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .ai-included li {
+      font-size: 0.83rem;
+      color: var(--grey);
+      line-height: 1.5;
+      padding: 6px 0 6px 22px;
+      position: relative;
+    }
+
+    .ai-included li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 11px;
+      height: 6px;
+      border-left: 1.5px solid var(--beige-dark);
+      border-bottom: 1.5px solid var(--beige-dark);
+      transform: rotate(-45deg);
     }
 
     /* ─── Rating aggregato ─── */
@@ -1310,6 +1521,8 @@
       .showcase-stats { grid-template-columns: repeat(4, 1fr); }
       .form-row.two { grid-template-columns: 1fr 1fr; }
       .compare-rows { grid-template-columns: repeat(3, 1fr); }
+      .trust-row { grid-template-columns: repeat(4, 1fr); }
+      .ai-features { grid-template-columns: 1fr 1fr; }
     }
 
     @media (min-width: 900px) {
@@ -1320,6 +1533,8 @@
       .testimonials-grid { grid-template-columns: repeat(3, 1fr); }
       .audience-grid { grid-template-columns: repeat(6, 1fr); }
       .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+      .ai-grid { grid-template-columns: 1.35fr 1fr; gap: 56px; }
+      .ai-features { grid-template-columns: 1fr; }
       .review-form-wrap { padding: 44px 40px; }
       .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
       .footer-bottom { flex-direction: row; justify-content: space-between; }
@@ -1347,6 +1562,7 @@
         <li><a href="#perche">Perch&eacute; noi</a></li>
         <li><a href="#processo">Come lavoriamo</a></li>
         <li><a href="#prezzi">Prezzi</a></li>
+        <li><a href="#receptionist">AI Receptionist</a></li>
         <li><a href="#testimonianze">Recensioni</a></li>
         <li>
           <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="nav-cta" target="_blank" rel="noopener">
@@ -1367,6 +1583,7 @@
     <a href="#processo" onclick="closeMobile()">Come lavoriamo</a>
     <a href="#perchi" onclick="closeMobile()">Per chi</a>
     <a href="#prezzi" onclick="closeMobile()">Prezzi</a>
+    <a href="#receptionist" onclick="closeMobile()">AI Receptionist</a>
     <a href="#testimonianze" onclick="closeMobile()">Recensioni</a>
     <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20richiedere%20un%20preventivo%20gratuito%20per%20il%20mio%20sito%20web" class="btn-primary" target="_blank" rel="noopener" style="margin-top: 16px;">
       Preventivo gratuito
@@ -1685,64 +1902,86 @@
       <div class="pricing-grid">
         <div class="price-card glass fade-up">
           <div class="price-name">Starter</div>
-          <div class="price-value">460&euro;<small>una volta</small></div>
+          <div class="price-value">460&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
           <p class="price-tagline">
             Il sito che ti serve per esistere online e farti trovare.
-            Perfetto per artigiani e attivit&agrave; che partono da zero.
+            Perfetto per chi parte da zero.
           </p>
           <ul class="price-list">
-            <li>Sito <strong>one-page</strong> fino a 5 sezioni</li>
-            <li>Design <strong>su misura</strong>, non un template</li>
-            <li>Perfetto su <strong>telefono e computer</strong></li>
-            <li>Pulsante WhatsApp e form contatti</li>
-            <li>Scheda <strong>Google Maps</strong> configurata</li>
-            <li>SEO di base per il tuo paese</li>
-            <li><strong>Dominio e hosting primo anno inclusi</strong></li>
-            <li>2 giri di modifiche compresi</li>
-            <li>Online in <strong>10-15 giorni</strong></li>
+            <li>Fino a <strong>5 pagine</strong></li>
+            <li>Design <strong>responsive</strong></li>
+            <li>Form di contatto</li>
+            <li>Ottimizzazione <strong>SEO base</strong></li>
+            <li>Integrazione social</li>
+            <li>2 revisioni incluse</li>
+            <li>Consegna in <strong>10 giorni</strong> lavorativi</li>
+            <li>Supporto via email</li>
           </ul>
-          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Starter%20da%20460%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Richiedi lo Starter</a>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Starter%20da%20460%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Inizia ora</a>
         </div>
 
         <div class="price-card glass featured fade-up delay-1">
           <span class="price-badge">Pi&ugrave; scelto</span>
-          <div class="price-name">Professionale</div>
-          <div class="price-value">660&euro;<small>una volta</small></div>
+          <div class="price-name">Professional</div>
+          <div class="price-value">660&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
           <p class="price-tagline">
             Per chi ha pi&ugrave; da raccontare: servizi, listini, gallerie.
             Il sito diventa uno strumento di vendita.
           </p>
           <ul class="price-list">
-            <li>Tutto quello dello <strong>Starter</strong></li>
-            <li>Fino a <strong>5 pagine</strong> separate</li>
-            <li>Galleria lavori o <strong>portfolio</strong></li>
-            <li>Pagina servizi con listino</li>
-            <li><strong>SEO locale</strong> su pi&ugrave; comuni</li>
-            <li>Google Business ottimizzato</li>
-            <li>4 giri di modifiche compresi</li>
-            <li><strong>3 mesi di assistenza</strong> inclusi</li>
+            <li>Fino a <strong>10 pagine</strong></li>
+            <li>Design <strong>premium + animazioni</strong></li>
+            <li>SEO ottimizzato (on-page)</li>
+            <li>Integrazione strumenti (Analytics, CRM)</li>
+            <li>Velocit&agrave; e performance ottimizzate</li>
+            <li>4 revisioni incluse</li>
+            <li><strong>3 mesi di supporto</strong> gratuito</li>
+            <li>Consegna in <strong>15 giorni</strong> lavorativi</li>
           </ul>
-          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Professionale%20da%20660%E2%82%AC" class="price-cta solid" target="_blank" rel="noopener">Richiedi il Professionale</a>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Professional%20da%20660%E2%82%AC" class="price-cta solid" target="_blank" rel="noopener">Inizia ora</a>
         </div>
 
         <div class="price-card glass fade-up delay-2">
           <div class="price-name">Premium</div>
-          <div class="price-value">1.160&euro;<small>una volta</small></div>
+          <div class="price-value">860&nbsp;&euro;</div>
+          <div class="price-terms">Pagamento una tantum</div>
           <p class="price-tagline">
             Il pacchetto completo, per chi vuole che il sito
             lavori davvero e porti richieste ogni mese.
           </p>
           <ul class="price-list">
-            <li>Tutto quello del <strong>Professionale</strong></li>
             <li><strong>Pagine illimitate</strong></li>
-            <li>Testi scritti da noi con te</li>
-            <li><strong>Prenotazioni</strong> o richieste appuntamento</li>
-            <li>Blog o news che aggiorni da solo</li>
-            <li>Sito in <strong>due lingue</strong></li>
-            <li>Modifiche illimitate durante lo sviluppo</li>
-            <li><strong>12 mesi di assistenza</strong> inclusi</li>
+            <li>UX/UI avanzata e personalizzata</li>
+            <li><strong>SEO completo</strong> (tecnico + contenuti)</li>
+            <li>Integrazioni avanzate (CRM, API, ecc.)</li>
+            <li>Funzionalit&agrave; su misura</li>
+            <li>6 revisioni incluse</li>
+            <li><strong>6 mesi di supporto</strong> prioritario</li>
+            <li>Consegna in <strong>20 giorni</strong> lavorativi</li>
           </ul>
-          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Premium%20da%201160%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Richiedi il Premium</a>
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20sono%20interessato%20al%20pacchetto%20Premium%20da%20860%E2%82%AC" class="price-cta" target="_blank" rel="noopener">Inizia ora</a>
+        </div>
+      </div>
+
+      <!-- Garanzie -->
+      <div class="trust-row fade-up">
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div><strong>Siti web sicuri</strong><span>Protezione e affidabilit&agrave;</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <div><strong>Performance al top</strong><span>Velocit&agrave; e stabilit&agrave;</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 14v-3a8 8 0 0116 0v3"/><path d="M4 14a2 2 0 012-2h1v5H6a2 2 0 01-2-2zM20 14a2 2 0 01-2 2h-1v-5h1a2 2 0 012 2z"/><path d="M18 17v1a3 3 0 01-3 3h-2"/></svg>
+          <div><strong>Supporto dedicato</strong><span>Sempre al tuo fianco</span></div>
+        </div>
+        <div class="trust-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          <div><strong>Nessun costo nascosto</strong><span>Trasparenza totale</span></div>
         </div>
       </div>
 
@@ -1795,9 +2034,94 @@
         </div>
         <div class="price-note">
           <span>Demo gratuita prima di pagare</span>
-          <span>Si paga met&agrave; all'inizio, met&agrave; alla consegna</span>
-          <span>Dal 2&deg; anno solo dominio e hosting, circa 60&euro;</span>
+          <span>Pagamento una tantum, non un abbonamento</span>
           <span>Il sito &egrave; tuo, non in affitto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- AI Receptionist -->
+  <section class="ai-section" id="receptionist">
+    <div class="container">
+      <span class="ai-tag fade-up">
+        <span class="dot" style="width:6px;height:6px;background:var(--beige);border-radius:50%;animation:pulse 2s infinite"></span>
+        Novit&agrave;
+      </span>
+      <h2 class="section-title serif gradient-text fade-up delay-1">
+        Non puoi fermarti ogni volta<br>
+        <span class="gradient-beige">che squilla il telefono?</span>
+      </h2>
+      <p class="section-subtitle fade-up delay-2">
+        Un assistente AI risponde al posto tuo con un tono professionale,
+        raccoglie le informazioni e ti inoltra solo le richieste importanti.
+        Tu continui a lavorare.
+      </p>
+
+      <div class="ai-grid">
+        <div>
+          <ul class="ai-features">
+            <li class="fade-up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+              <span><strong>Risponde 24 ore su 24.</strong> Anche di sera, il sabato
+              e mentre hai le mani occupate.</span>
+            </li>
+            <li class="fade-up delay-1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8A8.5 8.5 0 0112.5 20a8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7A8.4 8.4 0 014 11.5 8.5 8.5 0 018.7 3.9a8.4 8.4 0 013.8-.9h.5a8.5 8.5 0 018 8v.5z"/></svg>
+              <span><strong>Risponde alle domande frequenti.</strong> Orari, zone
+              servite, tipi di intervento, tempi di attesa.</span>
+            </li>
+            <li class="fade-up delay-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.9"/></svg>
+              <span><strong>Raccoglie i dati del cliente.</strong> Nome, telefono,
+              indirizzo e cosa gli serve, scritti e pronti.</span>
+            </li>
+            <li class="fade-up delay-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg>
+              <span><strong>Prenota gli appuntamenti.</strong> Si collega al tuo
+              calendario e fissa senza sovrapposizioni.</span>
+            </li>
+            <li class="fade-up delay-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.5-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+              <span><strong>Ti passa le urgenze.</strong> Se serve subito,
+              la chiamata arriva a te. Il resto aspetta.</span>
+            </li>
+            <li class="fade-up delay-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 15l3-4 3 3 4-6"/></svg>
+              <span><strong>Report mensile delle chiamate.</strong> Quante ne sono
+              arrivate, cosa chiedevano, quante hai chiuso.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ai-price glass fade-up delay-2">
+          <div class="price-name">AI Receptionist</div>
+          <div class="ai-price-main">
+            <span class="amount">99&nbsp;&euro;</span>
+            <span class="per">/ mese</span>
+          </div>
+          <div class="price-terms">Disdici quando vuoi</div>
+
+          <div class="ai-setup">
+            <strong>+ 299 &euro; di setup</strong> una tantum: configuriamo la voce,
+            i flussi di conversazione, il collegamento al calendario
+            e testiamo tutto insieme prima di attivare.
+          </div>
+
+          <ul class="ai-included">
+            <li>Numero dedicato o deviazione dal tuo</li>
+            <li>Personalizzazione su misura della tua attivit&agrave;</li>
+            <li>Aggiornamenti e manutenzione inclusi</li>
+            <li>Assistenza diretta via WhatsApp</li>
+          </ul>
+
+          <a href="https://wa.me/393505920776?text=Ciao%2C%20vorrei%20sapere%20come%20funziona%20l%27AI%20Receptionist%20da%2099%E2%82%AC%20al%20mese" class="price-cta solid" target="_blank" rel="noopener">Provalo sulla tua attivit&agrave;</a>
+          <p style="font-size:0.76rem;color:var(--grey-dark);line-height:1.5;margin-top:16px;text-align:center">
+            Ti facciamo sentire una chiamata di prova
+            prima che decidi qualsiasi cosa.
+          </p>
         </div>
       </div>
     </div>
@@ -2002,6 +2326,7 @@
           <a href="#perche">Perch&eacute; noi</a>
           <a href="#processo">Come lavoriamo</a>
           <a href="#prezzi">Prezzi</a>
+          <a href="#receptionist">AI Receptionist</a>
           <a href="#perchi">Per chi</a>
           <a href="#testimonianze">Recensioni</a>
         </div>
