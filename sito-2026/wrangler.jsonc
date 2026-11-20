@@ -1,0 +1,8 @@
+{
+  // Worker che serve il sito statico (generato da build-worker.py)
+  "name": "marea-creative",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-17",
+  "workers_dev": true,
+  "preview_urls": false
+}

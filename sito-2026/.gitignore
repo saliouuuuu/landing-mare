@@ -1,0 +1,5 @@
+dist/
+worker.js
+worker-meta.json
+shots/
+node_modules/
