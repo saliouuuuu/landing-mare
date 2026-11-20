@@ -240,13 +240,13 @@ else safe(() => {
     .fromTo('.hero__orb', { opacity: 0, scale: .85 }, { opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out' }, .3)
     .fromTo('.hero__orb2', { opacity: 0 }, { opacity: 1, duration: 1.2 }, .6)
     .fromTo('.hero__phone', { opacity: 0, y: 70, rotation: -14 }, { opacity: 1, y: 0, rotation: -7, duration: 1.4, ease: 'expo.out' }, .5)
-    .fromTo('.hero__card, .hero__tag', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, stagger: .15 }, .95)
+    .fromTo('.hero__card, .hero__tag, .hero__msg', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, stagger: .15 }, .95)
     .call(() => { $('.spark').classList.add('on'); countUp($('.hero__card b'), 100, 1.6); }, null, 1.1);
   tl.eventCallback('onComplete', () => root.classList.remove('js'));
   // la composizione si muove appena col puntatore
   if (fine) {
     const mk = (sel, k) => ({ x: G.quickTo(sel, 'x', { duration: 1.4, ease: 'power3.out' }), y: G.quickTo(sel, 'y', { duration: 1.4, ease: 'power3.out' }), k });
-    const parts = [mk('.hero__phone', 14), mk('.hero__card', -18), mk('.hero__tag', 10)];
+    const parts = [mk('.hero__phone', 14), mk('.hero__card', -18), mk('.hero__tag', 10), mk('.hero__msg', -12)];
     $('#top').addEventListener('pointermove', e => { if (tl.isActive()) return; const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5; parts.forEach(o => { o.x(x * o.k); o.y(y * o.k * .7); }); });
   }
   G.to('.hero__art', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true } });

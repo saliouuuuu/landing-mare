@@ -431,3 +431,69 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radiu
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .gcard,.ct__card{background:rgba(26,28,28,.94)}
 }
+
+/* ===================== VETRO (glassmorphism) =====================
+   sfere tenui dietro ogni sezione e schede trasparenti sopra, che le sfocano */
+.deco{position:absolute;inset:0;pointer-events:none;z-index:0}
+.sec>.wrap{position:relative;z-index:1}
+.deco .sphere{opacity:.9}
+.dv1{width:clamp(220px,28vw,400px);aspect-ratio:1;right:4%;top:30%}
+.dv2{width:clamp(160px,18vw,260px);aspect-ratio:1;left:6%;bottom:-4%}
+.dv3{width:clamp(90px,9vw,130px);aspect-ratio:1;left:40%;top:60%}
+.dc1{width:clamp(200px,24vw,340px);aspect-ratio:1;left:10%;top:36%}
+.dc2{width:clamp(130px,14vw,200px);aspect-ratio:1;right:12%;bottom:4%}
+.dm1{width:clamp(200px,22vw,320px);aspect-ratio:1;left:44%;top:46%}
+.dl1{width:clamp(150px,16vw,230px);aspect-ratio:1;right:4%;top:44%}
+.dp1{width:clamp(200px,24vw,340px);aspect-ratio:1;right:2%;top:17%}
+.dp2{width:clamp(150px,16vw,240px);aspect-ratio:1;left:4%;top:30%}
+.dp3{width:clamp(200px,22vw,320px);aspect-ratio:1;right:14%;top:62%}
+.dp4{width:clamp(110px,11vw,160px);aspect-ratio:1;left:48%;top:76%}
+.dd1{width:clamp(180px,20vw,300px);aspect-ratio:1;right:6%;top:18%}
+.dd2{width:clamp(110px,11vw,160px);aspect-ratio:1;right:40%;bottom:0}
+.glass,.bx,.roi,.tab,.pk,.it,.clist li,.st.gl,.hero__ok li{
+  background:linear-gradient(150deg,rgba(255,255,255,.1),rgba(255,255,255,.03) 55%,rgba(255,255,255,.06)),rgba(16,18,18,.4);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.03),0 30px 60px -32px rgba(0,0,0,.75);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.glass{position:relative;border-radius:26px}
+.bx--a{background:linear-gradient(150deg,rgba(169,189,203,.16),rgba(255,255,255,.03) 60%,rgba(169,189,203,.07)),rgba(16,18,18,.4)}
+.bx--b{background:linear-gradient(150deg,rgba(167,192,178,.17),rgba(255,255,255,.03) 60%,rgba(167,192,178,.07)),rgba(16,18,18,.4)}
+.bx--c{background:linear-gradient(150deg,rgba(237,183,158,.17),rgba(255,255,255,.03) 60%,rgba(237,183,158,.07)),rgba(16,18,18,.4)}
+.it--pe{background:linear-gradient(150deg,rgba(237,183,158,.18),rgba(255,255,255,.03)),rgba(16,18,18,.4)}
+.it--sa{background:linear-gradient(150deg,rgba(167,192,178,.18),rgba(255,255,255,.03)),rgba(16,18,18,.4)}
+.it--mi{background:linear-gradient(150deg,rgba(169,189,203,.18),rgba(255,255,255,.03)),rgba(16,18,18,.4)}
+.roi{border-radius:30px}
+.pk{border-radius:0 0 30px 30px}
+.tab::before{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
+.tab:hover,.tab:hover::before{background:rgba(255,255,255,.13)}
+.tab.on{-webkit-backdrop-filter:none;backdrop-filter:none}
+.case__side{display:grid;gap:16px}
+.case__card{padding:24px 26px}
+.case__card h3{font-size:16px;font-weight:500;margin-bottom:10px}
+.case__card .facts li:last-child{border-bottom:0}
+.case__card .lh{margin-top:6px;margin-bottom:28px}
+.case__card .note{margin-top:0}
+.case__side .note{margin-top:0}
+.faq{padding:6px 30px;border-radius:28px}
+.faq .qa:first-child{border-top:0}
+.faq .qa:last-child{border-bottom:0}
+.clist{display:grid;gap:12px}
+.clist li,.clist li:first-child{padding:18px 22px;border-radius:20px}
+.hero__ok li{padding:8px 14px 8px 11px;border-radius:999px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.hero__ok{gap:8px}
+.hero__msg{left:-4%;bottom:14%;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 10px;border-radius:999px;font-size:13.5px}
+.hero__msg i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--sa);color:#132019;flex:0 0 34px}
+.hero__msg i svg{width:18px;height:18px;fill:currentColor}
+.hero__msg small{display:block;font-size:11px;color:var(--ink3);line-height:1.2}
+.top.solid{background:rgba(14,15,15,.9)}
+@media (max-width:900px){
+  .dv1{right:-10%;top:20%}.dv3{left:auto;right:30%;top:58%}
+  .dc1{left:-10%;top:30%}.dm1{left:30%;top:30%}
+  .dp1{right:-14%}.dp3{right:-24%;top:34%}.dp4{display:none}
+  .dd1{right:-10%;top:40%}
+}
+@media (max-width:600px){
+  .hero__msg{left:0;bottom:6%;font-size:12.5px}
+  .faq{padding:4px 18px}
+  .case__card{padding:20px}
+}
