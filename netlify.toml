@@ -1,2 +1,5 @@
+# Pubblica il nuovo sito (cartella sito-2026). Il vecchio index.html in radice resta nel repository ma non viene più pubblicato.
 [build]
-  publish = "."
+  base = "sito-2026"
+  command = "python3 build.py"
+  publish = "dist"

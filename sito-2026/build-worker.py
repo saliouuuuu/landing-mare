@@ -4,6 +4,7 @@ mt={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'t
 files={}
 for dp,_,fs in os.walk(D):
     for f in sorted(fs):
+        if f=='_headers': continue  # serve solo a Netlify
         rel='/'+os.path.relpath(os.path.join(dp,f),D); d=open(D+rel,'rb').read(); ext=os.path.splitext(f)[1]
         tpl=ext in ('.html','.xml','.txt')
         cc='no-cache' if ext in ('.html','.xml','.txt') else ('public, max-age=300' if ext in ('.css','.js') else 'public, max-age=86400')
